@@ -4,11 +4,17 @@
 
 const { Pool } = require('pg');
 
+// Parse the connection string and force IPv4
+const connectionString = process.env.DATABASE_URL;
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: connectionString,
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 10000,
+  ssl: connectionString?.includes('supabase') ? { rejectUnauthorized: false } : false,
+  // Force IPv4
+  family: 4,
 });
 
 pool.on('error', (err) => {
