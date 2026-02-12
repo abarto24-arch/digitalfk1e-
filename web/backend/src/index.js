@@ -20,8 +20,10 @@ const app = express();
 
 // Security middleware
 app.use(helmet());
+
+// CORS - allow all origins for beta testing
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: true,  // Allow any origin during beta
   credentials: true
 }));
 
