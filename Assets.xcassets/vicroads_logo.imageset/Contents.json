@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "vicroads_logo_verify.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

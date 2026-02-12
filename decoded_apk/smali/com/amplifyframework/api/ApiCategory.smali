@@ -1,0 +1,646 @@
+.class public final Lcom/amplifyframework/api/ApiCategory;
+.super Lcom/amplifyframework/core/category/Category;
+.source "SourceFile"
+
+# interfaces
+.implements Lcom/amplifyframework/api/ApiCategoryBehavior;
+
+
+# annotations
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Lcom/amplifyframework/core/category/Category<",
+        "Lcom/amplifyframework/api/ApiPlugin<",
+        "*>;>;",
+        "Lcom/amplifyframework/api/ApiCategoryBehavior;"
+    }
+.end annotation
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 0
+
+    invoke-direct {p0}, Lcom/amplifyframework/core/category/Category;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public delete(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/rest/RestBehavior;->delete(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public delete(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/rest/RestBehavior;->delete(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public get(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/rest/RestBehavior;->get(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public get(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/rest/RestBehavior;->get(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public getCategoryType()Lcom/amplifyframework/core/category/CategoryType;
+    .locals 0
+
+    sget-object p0, Lcom/amplifyframework/core/category/CategoryType;->API:Lcom/amplifyframework/core/category/CategoryType;
+
+    return-object p0
+.end method
+
+.method public head(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/rest/RestBehavior;->head(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public head(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/rest/RestBehavior;->head(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public mutate(Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<R:",
+            "Ljava/lang/Object;",
+            ">(",
+            "Lcom/amplifyframework/api/graphql/GraphQLRequest<",
+            "TR;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/graphql/GraphQLResponse<",
+            "TR;>;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/graphql/GraphQLOperation<",
+            "TR;>;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/graphql/GraphQLBehavior;->mutate(Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public mutate(Ljava/lang/String;Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<T:",
+            "Ljava/lang/Object;",
+            ">(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/graphql/GraphQLRequest<",
+            "TT;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/graphql/GraphQLResponse<",
+            "TT;>;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/graphql/GraphQLOperation<",
+            "TT;>;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/graphql/GraphQLBehavior;->mutate(Ljava/lang/String;Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public patch(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/rest/RestBehavior;->patch(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public patch(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/rest/RestBehavior;->patch(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public post(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/rest/RestBehavior;->post(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public post(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/rest/RestBehavior;->post(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public put(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/rest/RestBehavior;->put(Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public put(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/rest/RestOptions;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/rest/RestResponse;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/rest/RestOperation;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/rest/RestBehavior;->put(Ljava/lang/String;Lcom/amplifyframework/api/rest/RestOptions;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/rest/RestOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public query(Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<R:",
+            "Ljava/lang/Object;",
+            ">(",
+            "Lcom/amplifyframework/api/graphql/GraphQLRequest<",
+            "TR;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/graphql/GraphQLResponse<",
+            "TR;>;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/graphql/GraphQLOperation<",
+            "TR;>;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3}, Lcom/amplifyframework/api/graphql/GraphQLBehavior;->query(Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public query(Ljava/lang/String;Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+    .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<R:",
+            "Ljava/lang/Object;",
+            ">(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/graphql/GraphQLRequest<",
+            "TR;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/graphql/GraphQLResponse<",
+            "TR;>;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;)",
+            "Lcom/amplifyframework/api/graphql/GraphQLOperation<",
+            "TR;>;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    check-cast p0, Lcom/amplifyframework/api/ApiPlugin;
+
+    invoke-interface {p0, p1, p2, p3, p4}, Lcom/amplifyframework/api/graphql/GraphQLBehavior;->query(Ljava/lang/String;Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public subscribe(Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Action;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+    .locals 6
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<T:",
+            "Ljava/lang/Object;",
+            ">(",
+            "Lcom/amplifyframework/api/graphql/GraphQLRequest<",
+            "TT;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Ljava/lang/String;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/graphql/GraphQLResponse<",
+            "TT;>;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;",
+            "Lcom/amplifyframework/core/Action;",
+            ")",
+            "Lcom/amplifyframework/api/graphql/GraphQLOperation<",
+            "TT;>;"
+        }
+    .end annotation
+
+    .line 1
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    move-object v0, p0
+
+    check-cast v0, Lcom/amplifyframework/api/ApiPlugin;
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move-object v3, p3
+
+    move-object v4, p4
+
+    move-object v5, p5
+
+    invoke-interface/range {v0 .. v5}, Lcom/amplifyframework/api/graphql/GraphQLBehavior;->subscribe(Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Action;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method
+
+.method public subscribe(Ljava/lang/String;Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Action;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+    .locals 7
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "<T:",
+            "Ljava/lang/Object;",
+            ">(",
+            "Ljava/lang/String;",
+            "Lcom/amplifyframework/api/graphql/GraphQLRequest<",
+            "TT;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Ljava/lang/String;",
+            ">;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/graphql/GraphQLResponse<",
+            "TT;>;>;",
+            "Lcom/amplifyframework/core/Consumer<",
+            "Lcom/amplifyframework/api/ApiException;",
+            ">;",
+            "Lcom/amplifyframework/core/Action;",
+            ")",
+            "Lcom/amplifyframework/api/graphql/GraphQLOperation<",
+            "TT;>;"
+        }
+    .end annotation
+
+    .line 2
+    invoke-virtual {p0}, Lcom/amplifyframework/core/category/Category;->getSelectedPlugin()Lcom/amplifyframework/core/plugin/Plugin;
+
+    move-result-object p0
+
+    move-object v0, p0
+
+    check-cast v0, Lcom/amplifyframework/api/ApiPlugin;
+
+    move-object v1, p1
+
+    move-object v2, p2
+
+    move-object v3, p3
+
+    move-object v4, p4
+
+    move-object v5, p5
+
+    move-object v6, p6
+
+    invoke-interface/range {v0 .. v6}, Lcom/amplifyframework/api/graphql/GraphQLBehavior;->subscribe(Ljava/lang/String;Lcom/amplifyframework/api/graphql/GraphQLRequest;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Consumer;Lcom/amplifyframework/core/Action;)Lcom/amplifyframework/api/graphql/GraphQLOperation;
+
+    move-result-object p0
+
+    return-object p0
+.end method

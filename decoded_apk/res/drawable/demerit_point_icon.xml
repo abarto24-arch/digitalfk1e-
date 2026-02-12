@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="34.0dip" android:width="34.0dip" android:viewportWidth="34.0" android:viewportHeight="34.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <path android:fillColor="@drawable/$demerit_point_icon__0" android:pathData="M5.071,17.5a13,13.5 0,1 0,26 0a13,13.5 0,1 0,-26 0z" />
+    <path android:fillColor="#00000000" android:pathData="M3,18.286L28.714,18.286" android:strokeColor="#ff253544" android:strokeWidth="4.0" android:strokeLineCap="round" />
+    <path android:fillColor="#00000000" android:pathData="M12,18L12,21" android:strokeColor="#ff253544" android:strokeWidth="1.0" android:strokeLineCap="round" />
+    <path android:fillColor="#00000000" android:pathData="M16,18L16,21" android:strokeColor="#ff253544" android:strokeWidth="1.0" android:strokeLineCap="round" />
+    <path android:fillColor="#00000000" android:pathData="M20,18L20,21" android:strokeColor="#ff253544" android:strokeWidth="1.0" android:strokeLineCap="round" />
+    <path android:fillColor="#00000000" android:pathData="M24,18L24,21" android:strokeColor="#ff253544" android:strokeWidth="1.0" android:strokeLineCap="round" />
+    <path android:fillColor="#ff43b02a" android:pathData="M18.071,17.5m-7.5,0a7.5,7.5 0,1 1,15 0a7.5,7.5 0,1 1,-15 0" />
+    <path android:fillColor="#ffeeeff0" android:pathData="M18.071,17.5m-3.5,0a3.5,3.5 0,1 1,7 0a3.5,3.5 0,1 1,-7 0" />
+</vector>

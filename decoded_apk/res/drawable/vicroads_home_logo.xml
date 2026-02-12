@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="31.0dip" android:width="38.0dip" android:viewportWidth="38.0" android:viewportHeight="31.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <group>
+        <clip-path android:pathData="M0,0h38v31h-38z" />
+        <path android:fillColor="@drawable/$vicroads_home_logo__0" android:pathData="M34.014,26.997C34.014,26.997 30.522,30.417 27.768,27.659C25.839,25.729 0.067,0.055 0.067,0.055H7.021L34.014,26.997Z" />
+        <path android:fillColor="@drawable/$vicroads_home_logo__1" android:pathData="M29.833,5.745C29.065,5.745 25.84,5.745 25.84,5.745C25.84,5.745 21.362,10.22 20.95,10.632C23.055,10.632 25.735,10.632 27.719,10.632C28.214,10.632 28.681,10.624 29.137,10.639C29.789,10.659 30.417,10.727 31.051,10.942C31.899,11.229 32.642,11.759 33.163,12.489C33.606,13.113 33.875,13.844 34.023,14.589V13.407V10.193C34.021,7.971 32.623,5.745 29.833,5.745Z" />
+        <path android:fillColor="@drawable/$vicroads_home_logo__2" android:pathData="M31.047,10.942C30.413,10.727 29.785,10.659 29.133,10.639C29.131,13.261 29.133,20.537 29.133,22.125L34.018,27.007V14.591C33.871,13.844 33.602,13.113 33.159,12.49C32.639,11.761 31.895,11.232 31.047,10.942Z" />
+    </group>
+</vector>

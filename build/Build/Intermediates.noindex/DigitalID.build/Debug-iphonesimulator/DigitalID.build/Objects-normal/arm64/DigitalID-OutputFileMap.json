@@ -1,0 +1,178 @@
+{
+  "" : {
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalID-master.dia",
+    "emit-module-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalID-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalID-master-emit-module.dia",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalID-master.swiftdeps"
+  },
+  "/Users/arnobarton/digitalfakie/DigitalIDApp.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Models/Licence.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/Licence~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Networking/NetworkService.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/NetworkService~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Security/SecureStorage.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/SecureStorage~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Utils/FontManager.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontManager~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Utils/LayoutConstants.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LayoutConstants~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/ViewModels/HomeViewModel.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeViewModel~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/ViewModels/LicenceViewModel.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceViewModel~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/CustomTabBar.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/FontExtensions.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/HomeView.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/HomeView~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/LicenceDetailsFullView.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceDetailsFullView~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/LicenceView.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LicenceView~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/LoadingView.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/LoadingView~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/ProfileView.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/ProfileView~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/Views/VicRoadsIcons.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/VicRoadsIcons~partial.swiftmodule"
+  },
+  "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

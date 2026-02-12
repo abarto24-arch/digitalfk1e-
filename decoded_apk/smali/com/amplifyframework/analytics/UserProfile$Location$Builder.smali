@@ -1,0 +1,160 @@
+.class public final Lcom/amplifyframework/analytics/UserProfile$Location$Builder;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lcom/amplifyframework/analytics/UserProfile$Location;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x19
+    name = "Builder"
+.end annotation
+
+
+# instance fields
+.field private city:Ljava/lang/String;
+
+.field private country:Ljava/lang/String;
+
+.field private latitude:Ljava/lang/Double;
+
+.field private longitude:Ljava/lang/Double;
+
+.field private postalCode:Ljava/lang/String;
+
+.field private region:Ljava/lang/String;
+
+
+# direct methods
+.method public constructor <init>()V
+    .locals 0
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+.method public static bridge synthetic a(Lcom/amplifyframework/analytics/UserProfile$Location$Builder;)Ljava/lang/String;
+    .locals 0
+
+    iget-object p0, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->city:Ljava/lang/String;
+
+    return-object p0
+.end method
+
+.method public static bridge synthetic b(Lcom/amplifyframework/analytics/UserProfile$Location$Builder;)Ljava/lang/String;
+    .locals 0
+
+    iget-object p0, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->country:Ljava/lang/String;
+
+    return-object p0
+.end method
+
+.method public static bridge synthetic c(Lcom/amplifyframework/analytics/UserProfile$Location$Builder;)Ljava/lang/Double;
+    .locals 0
+
+    iget-object p0, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->latitude:Ljava/lang/Double;
+
+    return-object p0
+.end method
+
+.method public static bridge synthetic d(Lcom/amplifyframework/analytics/UserProfile$Location$Builder;)Ljava/lang/Double;
+    .locals 0
+
+    iget-object p0, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->longitude:Ljava/lang/Double;
+
+    return-object p0
+.end method
+
+.method public static bridge synthetic e(Lcom/amplifyframework/analytics/UserProfile$Location$Builder;)Ljava/lang/String;
+    .locals 0
+
+    iget-object p0, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->postalCode:Ljava/lang/String;
+
+    return-object p0
+.end method
+
+.method public static bridge synthetic f(Lcom/amplifyframework/analytics/UserProfile$Location$Builder;)Ljava/lang/String;
+    .locals 0
+
+    iget-object p0, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->region:Ljava/lang/String;
+
+    return-object p0
+.end method
+
+
+# virtual methods
+.method public build()Lcom/amplifyframework/analytics/UserProfile$Location;
+    .locals 2
+
+    new-instance v0, Lcom/amplifyframework/analytics/UserProfile$Location;
+
+    const/4 v1, 0x0
+
+    invoke-direct {v0, p0, v1}, Lcom/amplifyframework/analytics/UserProfile$Location;-><init>(Lcom/amplifyframework/analytics/UserProfile$Location$Builder;I)V
+
+    return-object v0
+.end method
+
+.method public city(Ljava/lang/String;)Lcom/amplifyframework/analytics/UserProfile$Location$Builder;
+    .locals 0
+
+    invoke-static {p1}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
+
+    iput-object p1, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->city:Ljava/lang/String;
+
+    return-object p0
+.end method
+
+.method public country(Ljava/lang/String;)Lcom/amplifyframework/analytics/UserProfile$Location$Builder;
+    .locals 0
+
+    invoke-static {p1}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
+
+    iput-object p1, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->country:Ljava/lang/String;
+
+    return-object p0
+.end method
+
+.method public latitude(Ljava/lang/Double;)Lcom/amplifyframework/analytics/UserProfile$Location$Builder;
+    .locals 0
+
+    invoke-static {p1}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
+
+    iput-object p1, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->latitude:Ljava/lang/Double;
+
+    return-object p0
+.end method
+
+.method public longitude(Ljava/lang/Double;)Lcom/amplifyframework/analytics/UserProfile$Location$Builder;
+    .locals 0
+
+    invoke-static {p1}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
+
+    iput-object p1, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->longitude:Ljava/lang/Double;
+
+    return-object p0
+.end method
+
+.method public postalCode(Ljava/lang/String;)Lcom/amplifyframework/analytics/UserProfile$Location$Builder;
+    .locals 0
+
+    invoke-static {p1}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
+
+    iput-object p1, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->postalCode:Ljava/lang/String;
+
+    return-object p0
+.end method
+
+.method public region(Ljava/lang/String;)Lcom/amplifyframework/analytics/UserProfile$Location$Builder;
+    .locals 0
+
+    invoke-static {p1}, Ljava/util/Objects;->requireNonNull(Ljava/lang/Object;)Ljava/lang/Object;
+
+    iput-object p1, p0, Lcom/amplifyframework/analytics/UserProfile$Location$Builder;->region:Ljava/lang/String;
+
+    return-object p0
+.end method

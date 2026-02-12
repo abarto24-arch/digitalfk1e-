@@ -1,0 +1,128 @@
+.class public final synthetic LD5/f;
+.super Lkotlin/jvm/internal/i;
+.source "SourceFile"
+
+# interfaces
+.implements Lfa/n;
+
+
+# static fields
+.field public static final T:LD5/f;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 7
+
+    new-instance v6, LD5/f;
+
+    const-string v4, "serializeDeviceSecretVerifierConfigTypeDocument(Laws/smithy/kotlin/runtime/serde/Serializer;Laws/sdk/kotlin/services/cognitoidentityprovider/model/DeviceSecretVerifierConfigType;)V"
+
+    const/4 v5, 0x1
+
+    const/4 v1, 0x2
+
+    const-class v2, LD5/l;
+
+    const-string v3, "serializeDeviceSecretVerifierConfigTypeDocument"
+
+    move-object v0, v6
+
+    invoke-direct/range {v0 .. v5}, Lkotlin/jvm/internal/i;-><init>(ILjava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+
+    sput-object v6, LD5/f;->T:LD5/f;
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    .locals 6
+
+    const/4 p0, 0x1
+
+    const/4 v0, 0x0
+
+    check-cast p1, Lr6/m;
+
+    check-cast p2, LC5/l0;
+
+    const-string v1, "p0"
+
+    invoke-static {p1, v1}, Lkotlin/jvm/internal/k;->f(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string v1, "p1"
+
+    invoke-static {p2, v1}, Lkotlin/jvm/internal/k;->f(Ljava/lang/Object;Ljava/lang/String;)V
+
+    new-instance v1, Lr6/i;
+
+    sget-object v2, Lr6/l;->i:Lr6/l;
+
+    new-instance v3, Lt6/h;
+
+    const-string v4, "PasswordVerifier"
+
+    invoke-direct {v3, v4}, Lt6/h;-><init>(Ljava/lang/String;)V
+
+    new-array v4, p0, [Lr6/c;
+
+    aput-object v3, v4, v0
+
+    invoke-static {v4}, LT9/l;->P([Ljava/lang/Object;)Ljava/util/Set;
+
+    move-result-object v3
+
+    invoke-direct {v1, v2, v3, v0}, Lr6/i;-><init>(Ls7/P2;Ljava/util/Set;I)V
+
+    new-instance v3, Lr6/i;
+
+    new-instance v4, Lt6/h;
+
+    const-string v5, "Salt"
+
+    invoke-direct {v4, v5}, Lt6/h;-><init>(Ljava/lang/String;)V
+
+    new-array p0, p0, [Lr6/c;
+
+    aput-object v4, p0, v0
+
+    invoke-static {p0}, LT9/l;->P([Ljava/lang/Object;)Ljava/util/Set;
+
+    move-result-object p0
+
+    invoke-direct {v3, v2, p0, v0}, Lr6/i;-><init>(Ls7/P2;Ljava/util/Set;I)V
+
+    invoke-static {v1, v3}, LA/k;->u(Lr6/i;Lr6/i;)Lq2/n;
+
+    move-result-object p0
+
+    new-instance v0, Lr6/j;
+
+    invoke-direct {v0, p0}, Lr6/j;-><init>(Lq2/n;)V
+
+    invoke-interface {p1, v0}, Lr6/m;->b(Lr6/j;)Lr6/n;
+
+    move-result-object p0
+
+    iget-object p1, p2, LC5/l0;->a:Ljava/lang/String;
+
+    if-eqz p1, :cond_0
+
+    invoke-interface {p0, v1, p1}, Lr6/n;->c(Lr6/i;Ljava/lang/String;)V
+
+    :cond_0
+    iget-object p1, p2, LC5/l0;->b:Ljava/lang/String;
+
+    if-eqz p1, :cond_1
+
+    invoke-interface {p0, v3, p1}, Lr6/n;->c(Lr6/i;Ljava/lang/String;)V
+
+    :cond_1
+    invoke-interface {p0}, Lr6/n;->f()V
+
+    sget-object p0, LS9/y;->a:LS9/y;
+
+    return-object p0
+.end method

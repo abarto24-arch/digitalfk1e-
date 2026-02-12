@@ -1,0 +1,36 @@
+.class public final Li0/u;
+.super Lkotlin/jvm/internal/m;
+.source "SourceFile"
+
+# interfaces
+.implements Lfa/a;
+
+
+# static fields
+.field public static final T:Li0/u;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 2
+
+    new-instance v0, Li0/u;
+
+    const/4 v1, 0x0
+
+    invoke-direct {v0, v1}, Lkotlin/jvm/internal/m;-><init>(I)V
+
+    sput-object v0, Li0/u;->T:Li0/u;
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final bridge synthetic invoke()Ljava/lang/Object;
+    .locals 0
+
+    sget-object p0, Li0/d;->a:Li0/d;
+
+    return-object p0
+.end method

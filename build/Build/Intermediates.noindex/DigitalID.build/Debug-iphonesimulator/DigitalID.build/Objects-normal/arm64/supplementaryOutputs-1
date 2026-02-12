@@ -1,0 +1,18 @@
+"/Users/arnobarton/digitalfakie/Views/FontExtensions.swift":
+  const-values: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.swiftconstvalues"
+  swift-dependencies: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.swiftdeps"
+  dependencies: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.d"
+  diagnostics: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.dia"
+  object: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/FontExtensions.o"
+"/Users/arnobarton/digitalfakie/Views/CustomTabBar.swift":
+  object: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.o"
+  diagnostics: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.dia"
+  const-values: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.swiftconstvalues"
+  swift-dependencies: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.swiftdeps"
+  dependencies: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/CustomTabBar.d"
+"/Users/arnobarton/digitalfakie/DigitalIDApp.swift":
+  const-values: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.swiftconstvalues"
+  diagnostics: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.dia"
+  swift-dependencies: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.swiftdeps"
+  object: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.o"
+  dependencies: "/Users/arnobarton/digitalfakie/build/Build/Intermediates.noindex/DigitalID.build/Debug-iphonesimulator/DigitalID.build/Objects-normal/arm64/DigitalIDApp.d"

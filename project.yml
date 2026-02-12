@@ -1,0 +1,62 @@
+name: DigitalID
+options:
+  bundleIdPrefix: com.digitalid
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: en
+  xcodeVersion: "15.0"
+
+targets:
+  DigitalID:
+    type: application
+    platform: iOS
+    sources:
+      - path: .
+        excludes:
+          - "*.md"
+          - "*.sh"
+          - "*.yml"
+          - "*.xcodeproj"
+          - "build/**"
+          - ".build/**"
+          - "DerivedData/**"
+          - "extracted_icons/**"
+          - "layoutmockup/**"
+          - "decoded_apk/**"
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: DigitalID
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen:
+          UIColorName: ""
+          UIImageName: ""
+        UIRequiresFullScreen: true
+        UIStatusBarStyle: UIStatusBarStyleDefault
+        UIViewControllerBasedStatusBarAppearance: true
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIAppFonts:
+          - vic_regular.otf
+          - vic_medium.otf
+          - vic_semibold.otf
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.digitalid.app
+        SWIFT_VERSION: "5.0"
+        IPHONEOS_DEPLOYMENT_TARGET: "17.0"
+        TARGETED_DEVICE_FAMILY: "1,2"
+        DEVELOPMENT_TEAM: ""
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    dependencies: []
+
+schemes:
+  DigitalID:
+    build:
+      targets:
+        DigitalID: all
+    run:
+      config: Debug
+    archive:
+      config: Release

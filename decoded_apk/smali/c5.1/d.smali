@@ -1,0 +1,60 @@
+.class public final synthetic Lc5/d;
+.super Lkotlin/jvm/internal/i;
+.source "SourceFile"
+
+# interfaces
+.implements Lfa/n;
+
+
+# static fields
+.field public static final T:Lc5/d;
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .locals 7
+
+    new-instance v6, Lc5/d;
+
+    const-string v4, "serializePolicyDescriptorTypeDocument(Laws/smithy/kotlin/runtime/serde/Serializer;Laws/sdk/kotlin/runtime/auth/credentials/internal/sts/model/PolicyDescriptorType;)V"
+
+    const/4 v5, 0x1
+
+    const/4 v1, 0x2
+
+    const-class v2, Lc5/e;
+
+    const-string v3, "serializePolicyDescriptorTypeDocument"
+
+    move-object v0, v6
+
+    invoke-direct/range {v0 .. v5}, Lkotlin/jvm/internal/i;-><init>(ILjava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+
+    sput-object v6, Lc5/d;->T:Lc5/d;
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+    .locals 0
+
+    check-cast p1, Lr6/m;
+
+    check-cast p2, Lb5/h;
+
+    const-string p0, "p0"
+
+    invoke-static {p1, p0}, Lkotlin/jvm/internal/k;->f(Ljava/lang/Object;Ljava/lang/String;)V
+
+    const-string p0, "p1"
+
+    invoke-static {p2, p0}, Lkotlin/jvm/internal/k;->f(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-static {p1, p2}, Lc5/e;->b(Lr6/m;Lb5/h;)V
+
+    sget-object p0, LS9/y;->a:LS9/y;
+
+    return-object p0
+.end method

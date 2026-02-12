@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		158AFE707685537C731ED081 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AA8E89C3C77C0B474E39A5 /* NetworkService.swift */; };
+		15D714A0543FA5F23EA127A3 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0B78332B785552F5646E1D /* LoadingView.swift */; };
+		29CA193DD1C601683768B2C6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1500A25E5BD68FA014D9C9 /* HomeView.swift */; };
+		2A329362654B371A8BA88905 /* DigitalIDApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE788645FBC59C01980A1F /* DigitalIDApp.swift */; };
+		36F1025E9C27B266A34C0666 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76A9E1BAAF66A9C3AB30401B /* Assets.xcassets */; };
+		39329BB921A2D20C8A1DDD36 /* LayoutConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A01C480123CD6CFB4C853E2 /* LayoutConstants.swift */; };
+		486A56F904BFFD122BEE0E02 /* vicroads_logo_verify.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D2A4D28E1E1F4C3F665E965 /* vicroads_logo_verify.png */; };
+		57E8F639B307F89DF6DD17F4 /* vicroads_logo_verify.webp in Resources */ = {isa = PBXBuildFile; fileRef = FD6DBDFA4E8ED1C92C5E782B /* vicroads_logo_verify.webp */; };
+		58212D76D8003381E8DAAFC8 /* LicenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1397C3A820D84108380196 /* LicenceView.swift */; };
+		58D6832889BC9E6F4161FBFE /* floral_bgro_w.png in Resources */ = {isa = PBXBuildFile; fileRef = 0733DA0E37161A165045EE1C /* floral_bgro_w.png */; };
+		5E29AD128224D119A2818F05 /* LicenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E2B2075FBBB248107E8CC8 /* LicenceViewModel.swift */; };
+		62C1758BF7D83B8BD19DABBF /* ic_launcher_foreground.png in Resources */ = {isa = PBXBuildFile; fileRef = 37C9FA0A5FD61EBC67009917 /* ic_launcher_foreground.png */; };
+		6D9E5220531D712192F7B8DF /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD0BFF3C289E467ED8AF714 /* SecureStorage.swift */; };
+		6ED59A02570F60C046B0B5CF /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4F59FC0020B32ACCC4679F /* CustomTabBar.swift */; };
+		72B50FA3F2A14680B37352E5 /* Licence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D6669AAB2238B5A5514943 /* Licence.swift */; };
+		73F78B5C4AC644760B52DC24 /* vic_coat_of_arms.webp in Resources */ = {isa = PBXBuildFile; fileRef = 4A79677B17E7002967DD7475 /* vic_coat_of_arms.webp */; };
+		77962AA885490C0CB078AC0D /* FontManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD9D4880E43741ADFD6D6B0 /* FontManager.swift */; };
+		79C3DD3EC5D36C1D63816D44 /* mockup_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 27FCE07DF63E5D14B42C4A2C /* mockup_bar.png */; };
+		7B4D679D30AFD11CD9823E83 /* FontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA5676991A6B02546F75DAF /* FontExtensions.swift */; };
+		7C50F3BCB75240F4A3FCF1AF /* vic_medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E39BD7275BDD882EE68EDD93 /* vic_medium.otf */; };
+		7F9231E8008C1F71ED520064 /* extracted_car.png in Resources */ = {isa = PBXBuildFile; fileRef = D45A0BED87CC7B80E4DAFA56 /* extracted_car.png */; };
+		817AAE45803A6CED46F397C6 /* LicenceDetailsFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3374390A40D19759D0AC3B0C /* LicenceDetailsFullView.swift */; };
+		8CE02FF11EAD8E9E739E412C /* VicRoadsIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A96435779CC0ACF9311B7E /* VicRoadsIcons.swift */; };
+		96E0DA496F1C6F10B9530666 /* floral_bgro_w.webp in Resources */ = {isa = PBXBuildFile; fileRef = A8B0F541AF078B868CB428DE /* floral_bgro_w.webp */; };
+		A07E52A09F5D8EEBAA980006 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 225B03F4FBA48CCE6A6F6F39 /* HomeViewModel.swift */; };
+		BFAC0A40BFDC6ED7C269AB17 /* vic_semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1BFDB9D1827E8B613679083A /* vic_semibold.otf */; };
+		C135AED8C23D65C21C9B402D /* notification_oversize_large_icon_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D54BDACEF22194F75884B59 /* notification_oversize_large_icon_bg.png */; };
+		C5C7126CE56C48D71174B9DB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142CFD04E61A9ABE4B555FD2 /* ProfileView.swift */; };
+		D859655C718DA47292039872 /* vic_coat_of_arms.png in Resources */ = {isa = PBXBuildFile; fileRef = 3627FEC3B78CCAC798FE7535 /* vic_coat_of_arms.png */; };
+		DA1DF3FB4A9EE07EDBF44DD0 /* IdentityProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B055354444805A5D9A7E727 /* IdentityProfile.swift */; };
+		E9C664B4F0951C967813EF73 /* vic_regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 77E98BCB37CB72647F26C6EE /* vic_regular.otf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0733DA0E37161A165045EE1C /* floral_bgro_w.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floral_bgro_w.png; sourceTree = "<group>"; };
+		0BCE788645FBC59C01980A1F /* DigitalIDApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DigitalIDApp.swift; sourceTree = "<group>"; };
+		142CFD04E61A9ABE4B555FD2 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		19E2B2075FBBB248107E8CC8 /* LicenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenceViewModel.swift; sourceTree = "<group>"; };
+		1BFDB9D1827E8B613679083A /* vic_semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = vic_semibold.otf; sourceTree = "<group>"; };
+		225B03F4FBA48CCE6A6F6F39 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		22A96435779CC0ACF9311B7E /* VicRoadsIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VicRoadsIcons.swift; sourceTree = "<group>"; };
+		27D6669AAB2238B5A5514943 /* Licence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Licence.swift; sourceTree = "<group>"; };
+		27FCE07DF63E5D14B42C4A2C /* mockup_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mockup_bar.png; sourceTree = "<group>"; };
+		2E1500A25E5BD68FA014D9C9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		3374390A40D19759D0AC3B0C /* LicenceDetailsFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenceDetailsFullView.swift; sourceTree = "<group>"; };
+		3627FEC3B78CCAC798FE7535 /* vic_coat_of_arms.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vic_coat_of_arms.png; sourceTree = "<group>"; };
+		37C9FA0A5FD61EBC67009917 /* ic_launcher_foreground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_launcher_foreground.png; sourceTree = "<group>"; };
+		3D2A4D28E1E1F4C3F665E965 /* vicroads_logo_verify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vicroads_logo_verify.png; sourceTree = "<group>"; };
+		4A01C480123CD6CFB4C853E2 /* LayoutConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutConstants.swift; sourceTree = "<group>"; };
+		4A79677B17E7002967DD7475 /* vic_coat_of_arms.webp */ = {isa = PBXFileReference; path = vic_coat_of_arms.webp; sourceTree = "<group>"; };
+		4F775AF951BFE4945C5621A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5FA5676991A6B02546F75DAF /* FontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontExtensions.swift; sourceTree = "<group>"; };
+		6D54BDACEF22194F75884B59 /* notification_oversize_large_icon_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notification_oversize_large_icon_bg.png; sourceTree = "<group>"; };
+		6F1397C3A820D84108380196 /* LicenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenceView.swift; sourceTree = "<group>"; };
+		76A9E1BAAF66A9C3AB30401B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		77E98BCB37CB72647F26C6EE /* vic_regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = vic_regular.otf; sourceTree = "<group>"; };
+		8B055354444805A5D9A7E727 /* IdentityProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityProfile.swift; sourceTree = "<group>"; };
+		90E1E4DA79C6C38F738D63EB /* DigitalID.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = DigitalID.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8B0F541AF078B868CB428DE /* floral_bgro_w.webp */ = {isa = PBXFileReference; path = floral_bgro_w.webp; sourceTree = "<group>"; };
+		CFD0BFF3C289E467ED8AF714 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
+		D45A0BED87CC7B80E4DAFA56 /* extracted_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = extracted_car.png; sourceTree = "<group>"; };
+		D9AA8E89C3C77C0B474E39A5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		DBD9D4880E43741ADFD6D6B0 /* FontManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontManager.swift; sourceTree = "<group>"; };
+		DD0B78332B785552F5646E1D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		E39BD7275BDD882EE68EDD93 /* vic_medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = vic_medium.otf; sourceTree = "<group>"; };
+		FA4F59FC0020B32ACCC4679F /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		FD6DBDFA4E8ED1C92C5E782B /* vicroads_logo_verify.webp */ = {isa = PBXFileReference; path = vicroads_logo_verify.webp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1158182B447C488F478D4937 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA4F59FC0020B32ACCC4679F /* CustomTabBar.swift */,
+				5FA5676991A6B02546F75DAF /* FontExtensions.swift */,
+				2E1500A25E5BD68FA014D9C9 /* HomeView.swift */,
+				3374390A40D19759D0AC3B0C /* LicenceDetailsFullView.swift */,
+				6F1397C3A820D84108380196 /* LicenceView.swift */,
+				DD0B78332B785552F5646E1D /* LoadingView.swift */,
+				142CFD04E61A9ABE4B555FD2 /* ProfileView.swift */,
+				22A96435779CC0ACF9311B7E /* VicRoadsIcons.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		283CF2DFCC772BF488DF4461 /* digitalfakie */ = {
+			isa = PBXGroup;
+			children = (
+				76A9E1BAAF66A9C3AB30401B /* Assets.xcassets */,
+				0BCE788645FBC59C01980A1F /* DigitalIDApp.swift */,
+				D45A0BED87CC7B80E4DAFA56 /* extracted_car.png */,
+				0733DA0E37161A165045EE1C /* floral_bgro_w.png */,
+				A8B0F541AF078B868CB428DE /* floral_bgro_w.webp */,
+				37C9FA0A5FD61EBC67009917 /* ic_launcher_foreground.png */,
+				4F775AF951BFE4945C5621A8 /* Info.plist */,
+				27FCE07DF63E5D14B42C4A2C /* mockup_bar.png */,
+				6D54BDACEF22194F75884B59 /* notification_oversize_large_icon_bg.png */,
+				3627FEC3B78CCAC798FE7535 /* vic_coat_of_arms.png */,
+				4A79677B17E7002967DD7475 /* vic_coat_of_arms.webp */,
+				E39BD7275BDD882EE68EDD93 /* vic_medium.otf */,
+				77E98BCB37CB72647F26C6EE /* vic_regular.otf */,
+				1BFDB9D1827E8B613679083A /* vic_semibold.otf */,
+				3D2A4D28E1E1F4C3F665E965 /* vicroads_logo_verify.png */,
+				FD6DBDFA4E8ED1C92C5E782B /* vicroads_logo_verify.webp */,
+				64F15AB07E09FFD98525C36B /* Models */,
+				78F7B501953AA7B1180B4561 /* Networking */,
+				D8287FA24639C19525E5F414 /* Security */,
+				8E1F91B0AE8C5A176BBFB8D2 /* Utils */,
+				DE425EA8BCF86DAE1BFD6181 /* ViewModels */,
+				1158182B447C488F478D4937 /* Views */,
+			);
+			name = digitalfakie;
+			path = .;
+			sourceTree = "<group>";
+		};
+		5B598DEB603ACC020234E97C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				90E1E4DA79C6C38F738D63EB /* DigitalID.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64F15AB07E09FFD98525C36B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8B055354444805A5D9A7E727 /* IdentityProfile.swift */,
+				27D6669AAB2238B5A5514943 /* Licence.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		78F7B501953AA7B1180B4561 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D9AA8E89C3C77C0B474E39A5 /* NetworkService.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		7E14E16F9F07A762B150FF27 = {
+			isa = PBXGroup;
+			children = (
+				283CF2DFCC772BF488DF4461 /* digitalfakie */,
+				64F15AB07E09FFD98525C36B /* Models */,
+				78F7B501953AA7B1180B4561 /* Networking */,
+				D8287FA24639C19525E5F414 /* Security */,
+				8E1F91B0AE8C5A176BBFB8D2 /* Utils */,
+				DE425EA8BCF86DAE1BFD6181 /* ViewModels */,
+				1158182B447C488F478D4937 /* Views */,
+				5B598DEB603ACC020234E97C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E1F91B0AE8C5A176BBFB8D2 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DBD9D4880E43741ADFD6D6B0 /* FontManager.swift */,
+				4A01C480123CD6CFB4C853E2 /* LayoutConstants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D8287FA24639C19525E5F414 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				CFD0BFF3C289E467ED8AF714 /* SecureStorage.swift */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
+		DE425EA8BCF86DAE1BFD6181 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				225B03F4FBA48CCE6A6F6F39 /* HomeViewModel.swift */,
+				19E2B2075FBBB248107E8CC8 /* LicenceViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		892D14DBCC626FB4CD196225 /* DigitalID */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 681AE45E88001E49C9AE4A49 /* Build configuration list for PBXNativeTarget "DigitalID" */;
+			buildPhases = (
+				B482C485FA67A648EF43E985 /* Sources */,
+				866ACF66149D3D67528A42CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DigitalID;
+			packageProductDependencies = (
+			);
+			productName = DigitalID;
+			productReference = 90E1E4DA79C6C38F738D63EB /* DigitalID.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F3EEB548C83DD2BAC85C356D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					892D14DBCC626FB4CD196225 = {
+						DevelopmentTeam = "";
+					};
+				};
+			};
+			buildConfigurationList = 50CD9032844F82EAF519D684 /* Build configuration list for PBXProject "DigitalID" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 7E14E16F9F07A762B150FF27;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				892D14DBCC626FB4CD196225 /* DigitalID */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		866ACF66149D3D67528A42CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36F1025E9C27B266A34C0666 /* Assets.xcassets in Resources */,
+				7F9231E8008C1F71ED520064 /* extracted_car.png in Resources */,
+				58D6832889BC9E6F4161FBFE /* floral_bgro_w.png in Resources */,
+				96E0DA496F1C6F10B9530666 /* floral_bgro_w.webp in Resources */,
+				62C1758BF7D83B8BD19DABBF /* ic_launcher_foreground.png in Resources */,
+				79C3DD3EC5D36C1D63816D44 /* mockup_bar.png in Resources */,
+				C135AED8C23D65C21C9B402D /* notification_oversize_large_icon_bg.png in Resources */,
+				D859655C718DA47292039872 /* vic_coat_of_arms.png in Resources */,
+				73F78B5C4AC644760B52DC24 /* vic_coat_of_arms.webp in Resources */,
+				7C50F3BCB75240F4A3FCF1AF /* vic_medium.otf in Resources */,
+				E9C664B4F0951C967813EF73 /* vic_regular.otf in Resources */,
+				BFAC0A40BFDC6ED7C269AB17 /* vic_semibold.otf in Resources */,
+				486A56F904BFFD122BEE0E02 /* vicroads_logo_verify.png in Resources */,
+				57E8F639B307F89DF6DD17F4 /* vicroads_logo_verify.webp in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B482C485FA67A648EF43E985 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ED59A02570F60C046B0B5CF /* CustomTabBar.swift in Sources */,
+				2A329362654B371A8BA88905 /* DigitalIDApp.swift in Sources */,
+				7B4D679D30AFD11CD9823E83 /* FontExtensions.swift in Sources */,
+				77962AA885490C0CB078AC0D /* FontManager.swift in Sources */,
+				29CA193DD1C601683768B2C6 /* HomeView.swift in Sources */,
+				A07E52A09F5D8EEBAA980006 /* HomeViewModel.swift in Sources */,
+				DA1DF3FB4A9EE07EDBF44DD0 /* IdentityProfile.swift in Sources */,
+				39329BB921A2D20C8A1DDD36 /* LayoutConstants.swift in Sources */,
+				72B50FA3F2A14680B37352E5 /* Licence.swift in Sources */,
+				817AAE45803A6CED46F397C6 /* LicenceDetailsFullView.swift in Sources */,
+				58212D76D8003381E8DAAFC8 /* LicenceView.swift in Sources */,
+				5E29AD128224D119A2818F05 /* LicenceViewModel.swift in Sources */,
+				15D714A0543FA5F23EA127A3 /* LoadingView.swift in Sources */,
+				158AFE707685537C731ED081 /* NetworkService.swift in Sources */,
+				C5C7126CE56C48D71174B9DB /* ProfileView.swift in Sources */,
+				6D9E5220531D712192F7B8DF /* SecureStorage.swift in Sources */,
+				8CE02FF11EAD8E9E739E412C /* VicRoadsIcons.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		80D16AB8E46854B200AF0AB5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.digitalid.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		9374A55370F6A1280FC96AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.digitalid.app;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9E31DF7C17E9C53F5A5673B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		C5A15B9E873A8F192B06D3B9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		50CD9032844F82EAF519D684 /* Build configuration list for PBXProject "DigitalID" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E31DF7C17E9C53F5A5673B6 /* Debug */,
+				C5A15B9E873A8F192B06D3B9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		681AE45E88001E49C9AE4A49 /* Build configuration list for PBXNativeTarget "DigitalID" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9374A55370F6A1280FC96AB1 /* Debug */,
+				80D16AB8E46854B200AF0AB5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F3EEB548C83DD2BAC85C356D /* Project object */;
+}
