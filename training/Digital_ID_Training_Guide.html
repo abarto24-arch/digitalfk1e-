@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital ID - Employee & Distributor Training Guide</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #fff;
+        }
+        
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            page-break-after: always;
+        }
+        
+        .page:last-child {
+            page-break-after: avoid;
+        }
+        
+        /* Cover Page */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%);
+            color: white;
+        }
+        
+        .cover .logo {
+            width: 80px;
+            height: 80px;
+            background: #10b981;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+        
+        .cover h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        
+        .cover h1 span {
+            color: #10b981;
+        }
+        
+        .cover .subtitle {
+            font-size: 24px;
+            opacity: 0.8;
+            margin-bottom: 60px;
+        }
+        
+        .cover .meta {
+            font-size: 14px;
+            opacity: 0.6;
+        }
+        
+        /* Section Headers */
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1f2e;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #10b981;
+        }
+        
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 25px 0 15px 0;
+        }
+        
+        h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4a5568;
+            margin: 20px 0 10px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #4a5568;
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box.warning {
+            background: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        
+        .info-box.important {
+            background: #fef2f2;
+            border-left-color: #ef4444;
+        }
+        
+        .info-box.blue {
+            background: #eff6ff;
+            border-left-color: #3b82f6;
+        }
+        
+        .info-box h4 {
+            margin-top: 0;
+            color: inherit;
+        }
+        
+        /* Price Box */
+        .price-box {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .price-box .price {
+            font-size: 48px;
+            font-weight: 800;
+        }
+        
+        .price-box .label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* Steps */
+        .steps {
+            counter-reset: step;
+        }
+        
+        .step {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: #10b981;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-right: 20px;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #1a1f2e;
+        }
+        
+        tr:hover {
+            background: #f8fafc;
+        }
+        
+        /* Do/Don't Lists */
+        .do-dont {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .do-list, .dont-list {
+            padding: 20px;
+            border-radius: 12px;
+        }
+        
+        .do-list {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+        }
+        
+        .dont-list {
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+        }
+        
+        .do-list h4 {
+            color: #10b981;
+        }
+        
+        .dont-list h4 {
+            color: #ef4444;
+        }
+        
+        .do-list ul, .dont-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .do-list li::before {
+            content: "✓ ";
+            color: #10b981;
+            font-weight: bold;
+        }
+        
+        .dont-list li::before {
+            content: "✗ ";
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* Flow Chart */
+        .flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 30px 0;
+        }
+        
+        .flow-item {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            margin: 5px 0;
+        }
+        
+        .flow-item.highlight {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+        
+        .flow-arrow {
+            font-size: 24px;
+            color: #10b981;
+        }
+        
+        /* Screenshot placeholder */
+        .screenshot {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            color: #64748b;
+            margin: 20px 0;
+        }
+        
+        .screenshot-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 10px;
+        }
+        
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .photo-example {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .photo-example.good {
+            border: 2px solid #10b981;
+        }
+        
+        .photo-example.bad {
+            border: 2px solid #ef4444;
+        }
+        
+        .photo-example .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        .photo-example .label {
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .photo-example.good .label {
+            color: #10b981;
+        }
+        
+        .photo-example.bad .label {
+            color: #ef4444;
+        }
+        
+        /* Quick Reference Card */
+        .quick-ref {
+            background: #1a1f2e;
+            color: white;
+            padding: 30px;
+            border-radius: 16px;
+            margin: 30px 0;
+        }
+        
+        .quick-ref h3 {
+            color: #10b981;
+            margin-top: 0;
+        }
+        
+        .quick-ref ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quick-ref li {
+            padding: 8px 0;
+            border-bottom: 1px solid #2d3748;
+        }
+        
+        .quick-ref li:last-child {
+            border-bottom: none;
+        }
+        
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-q {
+            font-weight: 600;
+            color: #1a1f2e;
+            margin-bottom: 8px;
+        }
+        
+        .faq-a {
+            color: #4a5568;
+            margin: 0;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .page {
+                page-break-after: always;
+                padding: 20px;
+            }
+            
+            .cover {
+                min-height: auto;
+                padding: 60px 40px;
+            }
+            
+            body {
+                font-size: 11pt;
+            }
+            
+            h2 {
+                font-size: 20pt;
+            }
+            
+            h3 {
+                font-size: 14pt;
+            }
+        }
+
+        /* Code Box */
+        .code-example {
+            background: #1a1f2e;
+            color: #10b981;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 24px;
+            letter-spacing: 4px;
+            padding: 20px 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="page cover">
+    <div class="logo">V</div>
+    <h1>Digital <span>ID</span></h1>
+    <p class="subtitle">Employee & Distributor Training Guide</p>
+    <p class="meta">Confidential Training Material • Version 1.0 • February 2026</p>
+</div>
+
+<!-- PAGE 1: WHAT IS DIGITAL ID -->
+<div class="page">
+    <h2>What is Digital ID?</h2>
+    
+    <p>Digital ID is a private beta iOS application that allows customers to carry a digital version of their Victorian driver's licence on their iPhone. Once set up, they can display their licence digitally instead of carrying a physical card.</p>
+    
+    <div class="price-box">
+        <div class="label">One-Time Payment</div>
+        <div class="price">$70 AUD</div>
+        <div class="label">Lifetime Beta Access</div>
+    </div>
+    
+    <h3>What's Included</h3>
+    <ul>
+        <li>Full Digital ID app access</li>
+        <li>Secure device-bound identity</li>
+        <li>Priority support</li>
+        <li>Lifetime access to all updates</li>
+    </ul>
+    
+    <div class="info-box important">
+        <h4>⚠️ Important Requirements</h4>
+        <ul>
+            <li><strong>iPhone only</strong> — Does NOT work on Android or iPad</li>
+            <li><strong>Payment codes only</strong> — No online card payments</li>
+            <li><strong>Manual approval required</strong> — We review every customer</li>
+        </ul>
+    </div>
+    
+    <h3>Key Security Features</h3>
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>What It Means</th>
+        </tr>
+        <tr>
+            <td>Device Binding</td>
+            <td>Account locks to ONE phone only. Cannot log in elsewhere.</td>
+        </tr>
+        <tr>
+            <td>Identity Sealing</td>
+            <td>Once submitted, details are permanently locked.</td>
+        </tr>
+        <tr>
+            <td>One Identity Per Account</td>
+            <td>Cannot create multiple identities or edit after submission.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 2: THE CUSTOMER JOURNEY OVERVIEW -->
+<div class="page">
+    <h2>The Complete Customer Journey</h2>
+    
+    <p>Every customer follows this exact path from payment to using their Digital ID:</p>
+    
+    <div class="flow">
+        <div class="flow-item highlight">Customer Pays You $70 Cash</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">You Generate Payment Code (Admin Panel)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">Give Code to Customer</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">Customer Signs Up on Website</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">Customer Enters Payment Code</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">We Approve Customer (24-48 hours)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">Customer Downloads App via TestFlight</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">Customer Logs In (Device Locked)</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item">Customer Enters Details + Photo + Signature</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item highlight">Done! Digital ID Ready to Use</div>
+    </div>
+    
+    <div class="info-box blue">
+        <h4>📋 Your Main Responsibilities</h4>
+        <ol>
+            <li>Collect $70 AUD payment from customer</li>
+            <li>Generate a payment code in the admin panel</li>
+            <li>Give the code to the customer</li>
+            <li>Help them understand photo & signature requirements</li>
+        </ol>
+    </div>
+</div>
+
+<!-- PAGE 3: GENERATING PAYMENT CODES -->
+<div class="page">
+    <h2>Generating Payment Codes</h2>
+    
+    <p>When a customer pays you $70 AUD in cash, you need to generate a payment code for them. This is your main task as a distributor.</p>
+    
+    <h3>Step-by-Step: Creating a Code</h3>
+    
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>Log into the Admin Panel</h4>
+                <p>Go to your admin panel URL and sign in with your distributor credentials.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>Go to "Payment Codes"</h4>
+                <p>Click the Payment Codes tab in the navigation menu.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Add Notes (Recommended)</h4>
+                <p>Type the customer's name or any identifier in the notes field. This helps you track who redeemed which code.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h4>Click "Generate Code"</h4>
+                <p>A unique 12-character code will be created instantly.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+                <h4>Give Code to Customer</h4>
+                <p>Write it down, text it, or let them photograph it. Click "Copy" for easy copying.</p>
+            </div>
+        </div>
+    </div>
+    
+    <h3>What a Code Looks Like</h3>
+    <div class="code-example">ABCD-EFGH-JKLM</div>
+    <p style="text-align: center; color: #64748b; font-size: 14px;">12 characters, separated by dashes, all uppercase</p>
+    
+    <div class="info-box warning">
+        <h4>⚠️ Code Rules</h4>
+        <ul>
+            <li><strong>One-time use only</strong> — Each code works for exactly one customer</li>
+            <li><strong>Expires in 30 days</strong> — Unused codes become invalid after 30 days</li>
+            <li><strong>Can be revoked</strong> — You can cancel unused codes if needed</li>
+            <li><strong>Tracked</strong> — The system shows which email redeemed each code</li>
+        </ul>
+    </div>
+</div>
+
+<!-- PAGE 4: ADMIN PANEL REFERENCE -->
+<div class="page">
+    <h2>Admin Panel Reference</h2>
+    
+    <p>The admin panel shows you all your generated codes and their status.</p>
+    
+    <h3>Code Status Types</h3>
+    <table>
+        <tr>
+            <th>Status</th>
+            <th>Meaning</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td><span style="background: #d1fae5; color: #065f46; padding: 4px 12px; border-radius: 4px; font-weight: 600;">ACTIVE</span></td>
+            <td>Code is ready to use, not yet redeemed</td>
+            <td>Can be given to customer or revoked</td>
+        </tr>
+        <tr>
+            <td><span style="background: #dbeafe; color: #1e40af; padding: 4px 12px; border-radius: 4px; font-weight: 600;">USED</span></td>
+            <td>Code has been redeemed by a customer</td>
+            <td>No action needed — shows who used it</td>
+        </tr>
+        <tr>
+            <td><span style="background: #f3f4f6; color: #6b7280; padding: 4px 12px; border-radius: 4px; font-weight: 600;">EXPIRED</span></td>
+            <td>30 days passed without being used</td>
+            <td>Generate a new code if needed</td>
+        </tr>
+        <tr>
+            <td><span style="background: #fee2e2; color: #991b1b; padding: 4px 12px; border-radius: 4px; font-weight: 600;">REVOKED</span></td>
+            <td>You cancelled the code</td>
+            <td>Cannot be undone</td>
+        </tr>
+    </table>
+    
+    <h3>Admin Panel Shows You:</h3>
+    <ul>
+        <li><strong>Active count</strong> — How many unused codes you have</li>
+        <li><strong>Used count</strong> — How many codes have been redeemed</li>
+        <li><strong>Code list</strong> — All codes with status, notes, date, and who redeemed</li>
+        <li><strong>Customer email</strong> — Shows which email used each code</li>
+    </ul>
+    
+    <div class="info-box">
+        <h4>💡 Best Practice: Always Add Notes</h4>
+        <p>When generating a code, add the customer's name in the notes field. Example: "John Smith - paid cash 13/02". This helps you track payments and resolve any issues later.</p>
+    </div>
+    
+    <h3>When to Revoke a Code</h3>
+    <ul>
+        <li>Customer changes their mind and wants a refund</li>
+        <li>You generated a code by mistake</li>
+        <li>Customer lost the code and needs a new one</li>
+    </ul>
+</div>
+
+<!-- PAGE 5: HELPING CUSTOMERS SIGN UP -->
+<div class="page">
+    <h2>Helping Customers Sign Up</h2>
+    
+    <p>After receiving their payment code, customers complete signup on the website. Here's what they'll see:</p>
+    
+    <h3>Website Signup Steps</h3>
+    
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>Enter Full Legal Name</h4>
+                <p>They enter their name <strong>exactly as it appears on their driver's licence</strong>. This is important — it cannot be changed later.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>Create Account</h4>
+                <p>They enter their email address and create a password. The email must be real — they'll need it to log into the app.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Enter Payment Code</h4>
+                <p>They type in the code you gave them. Once entered, their account is marked as PAID.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-box warning">
+        <h4>⚠️ Common Customer Mistakes</h4>
+        <table>
+            <tr>
+                <th>Mistake</th>
+                <th>What to Tell Them</th>
+            </tr>
+            <tr>
+                <td>Name doesn't match licence</td>
+                <td>"Enter your name exactly as shown on your physical licence, including middle names"</td>
+            </tr>
+            <tr>
+                <td>Typo in email</td>
+                <td>"Double-check your email — you'll need it to log into the app"</td>
+            </tr>
+            <tr>
+                <td>Code not working</td>
+                <td>"Make sure to enter all 12 characters including the dashes"</td>
+            </tr>
+            <tr>
+                <td>Forgot password</td>
+                <td>"Use the 'Forgot Password' link on the login page"</td>
+            </tr>
+        </table>
+    </div>
+    
+    <h3>After Signup</h3>
+    <p>Once they complete signup with a valid payment code:</p>
+    <ol>
+        <li>Their account is created and marked as PAID</li>
+        <li>We review and approve their account (usually 24-48 hours)</li>
+        <li>They receive TestFlight instructions to download the app</li>
+    </ol>
+</div>
+
+<!-- PAGE 6: APP SETUP PROCESS -->
+<div class="page">
+    <h2>App Setup Process</h2>
+    
+    <p>After approval, customers download the app and set up their Digital ID. Here's what they'll do:</p>
+    
+    <h3>App Installation</h3>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>Download TestFlight</h4>
+                <p>From the App Store, search "TestFlight" and install it (free). This is Apple's official app testing platform.</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>Join the Beta</h4>
+                <p>Click the TestFlight invite link provided after approval, then tap "Accept" and "Install".</p>
+            </div>
+        </div>
+        
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Log In to Digital ID</h4>
+                <p>Open the app and enter the same email/password from website signup.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-box important">
+        <h4>🔒 CRITICAL: Device Binding</h4>
+        <p>When they log in for the first time, their account is <strong>permanently locked to that iPhone</strong>. They cannot log in on any other device. If they get a new phone, they must contact support to reset their device binding.</p>
+    </div>
+    
+    <h3>Identity Setup Wizard</h3>
+    <p>The app guides them through entering their details:</p>
+    
+    <table>
+        <tr>
+            <th>Step</th>
+            <th>What They Enter</th>
+            <th>Tips</th>
+        </tr>
+        <tr>
+            <td>1. Personal Info</td>
+            <td>Full name, date of birth</td>
+            <td>Must match licence exactly</td>
+        </tr>
+        <tr>
+            <td>2. Address</td>
+            <td>Street, suburb, state, postcode</td>
+            <td>Current residential address</td>
+        </tr>
+        <tr>
+            <td>3. Licence Details</td>
+            <td>Licence number, type, expiry</td>
+            <td>Copy from physical licence</td>
+        </tr>
+        <tr>
+            <td>4. Photo</td>
+            <td>Photo of themselves</td>
+            <td>See photo guidelines (next page)</td>
+        </tr>
+        <tr>
+            <td>5. Signature</td>
+            <td>Sign with finger on screen</td>
+            <td>See signature guidelines</td>
+        </tr>
+        <tr>
+            <td>6. Review & Submit</td>
+            <td>Check all details</td>
+            <td>Cannot change after submitting!</td>
+        </tr>
+    </table>
+    
+    <div class="info-box warning">
+        <h4>⚠️ Identity Sealing</h4>
+        <p>Once they tap "Submit", their identity is <strong>permanently sealed</strong>. They cannot edit anything. If they made a mistake, they must contact support to reset their entire identity and start over.</p>
+    </div>
+</div>
+
+<!-- PAGE 7: PHOTO GUIDELINES -->
+<div class="page">
+    <h2>Photo Guidelines</h2>
+    
+    <p>The photo appears on their digital licence. A good photo makes the ID look professional and legitimate. Help customers take a proper ID-style photo.</p>
+    
+    <div class="do-dont">
+        <div class="do-list">
+            <h4>✓ DO</h4>
+            <ul>
+                <li>Face camera straight on</li>
+                <li>Neutral expression (or slight smile)</li>
+                <li>Good, even lighting on face</li>
+                <li>Plain, light background</li>
+                <li>Face clearly visible</li>
+                <li>Remove sunglasses & hats</li>
+                <li>Hair away from face</li>
+                <li>Head and shoulders visible</li>
+            </ul>
+        </div>
+        <div class="dont-list">
+            <h4>✗ DON'T</h4>
+            <ul>
+                <li>Selfies at weird angles</li>
+                <li>Filters or editing</li>
+                <li>Shadows on face</li>
+                <li>Busy or textured backgrounds</li>
+                <li>Blurry or dark photos</li>
+                <li>Other people in frame</li>
+                <li>Sunglasses or tinted lenses</li>
+                <li>Fashion headwear (beanies, caps)</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>Photo Examples Reference</h3>
+    
+    <table>
+        <tr>
+            <th style="width: 50%;">✓ Approved</th>
+            <th style="width: 50%;">✗ Rejected</th>
+        </tr>
+        <tr>
+            <td>Neutral expression, mouth closed, plain background, good lighting</td>
+            <td>Big smile showing teeth, mouth open</td>
+        </tr>
+        <tr>
+            <td>Plain, single-color background</td>
+            <td>Textured wallpaper or patterned background</td>
+        </tr>
+        <tr>
+            <td>Clean background, nothing behind head</td>
+            <td>Objects visible behind head (plants, furniture)</td>
+        </tr>
+        <tr>
+            <td>Religious headwear (hijab) — allowed</td>
+            <td>Fashion headwear (beanies, caps) — not allowed</td>
+        </tr>
+        <tr>
+            <td>Hair accessories removed</td>
+            <td>Sunglasses on head or hair clips visible</td>
+        </tr>
+        <tr>
+            <td>Even lighting, no shadows</td>
+            <td>Shadow across face or shadow behind head</td>
+        </tr>
+    </table>
+    
+    <div class="info-box">
+        <h4>💡 Ideal Photo Setup</h4>
+        <p>Have them stand about 30cm from a plain white or light-colored wall. Natural light from a window works best — make sure the light is on their face, not behind them. Hold the phone at eye level, about arm's length away. Frame from shoulders up.</p>
+    </div>
+</div>
+
+<!-- PAGE 8: PHOTO PROBLEMS & FIXES -->
+<div class="page">
+    <h2>Common Photo Problems & How to Fix Them</h2>
+    
+    <p>If a customer's photo doesn't look right, here's how to help them fix it:</p>
+    
+    <table>
+        <tr>
+            <th style="width: 30%;">Problem</th>
+            <th style="width: 70%;">Solution</th>
+        </tr>
+        <tr>
+            <td><strong>Face too dark or shadowy</strong></td>
+            <td>Move them closer to a window or turn on more lights. Make sure the light source is in front of them (lighting their face), not behind them.</td>
+        </tr>
+        <tr>
+            <td><strong>Blurry photo</strong></td>
+            <td>Hold the phone steady. Tap the screen to focus on their face. Make sure they stay completely still while the photo is taken.</td>
+        </tr>
+        <tr>
+            <td><strong>Bad angle</strong></td>
+            <td>Hold the phone straight, at their eye level. Don't tilt up, down, or to the side. Think "passport photo" — straight on.</td>
+        </tr>
+        <tr>
+            <td><strong>Messy background</strong></td>
+            <td>Find a plain wall — white, cream, or light grey. If no plain wall available, stand them further from the background so it blurs out.</td>
+        </tr>
+        <tr>
+            <td><strong>Face too small in frame</strong></td>
+            <td>Move closer to them, or zoom in slightly (but not too much or it gets grainy). Head and shoulders should fill most of the frame.</td>
+        </tr>
+        <tr>
+            <td><strong>Weird expression</strong></td>
+            <td>Tell them to relax, take a breath, and look directly at the camera lens (not the screen). A neutral face or tiny smile is fine.</td>
+        </tr>
+        <tr>
+            <td><strong>Shadow behind head</strong></td>
+            <td>Move them further from the wall (about 50cm away). This separates them from their shadow.</td>
+        </tr>
+        <tr>
+            <td><strong>Red eye</strong></td>
+            <td>Turn off the flash. Use natural light instead, or turn on room lights.</td>
+        </tr>
+    </table>
+    
+    <div class="info-box">
+        <h4>💡 Pro Tip: Take Multiple Photos</h4>
+        <p>Encourage them to take 3-4 photos and pick the best one. It's much easier to choose from options than to try to get one perfect shot. They can retake as many times as needed before submitting.</p>
+    </div>
+    
+    <h3>If You're Taking the Photo For Them</h3>
+    <ol>
+        <li>Find a plain, light-colored wall</li>
+        <li>Position them about 30cm from the wall</li>
+        <li>Make sure main light source is in front of them</li>
+        <li>Hold phone at their eye level</li>
+        <li>Frame from shoulders up, centered</li>
+        <li>Tell them to relax and look at the camera</li>
+        <li>Take 2-3 shots</li>
+        <li>Show them and let them pick the best one</li>
+    </ol>
+</div>
+
+<!-- PAGE 9: SIGNATURE GUIDELINES -->
+<div class="page">
+    <h2>Signature Guidelines</h2>
+    
+    <p>The signature appears at the bottom of their digital licence. It should look like their real signature — the one they use on official documents.</p>
+    
+    <div class="do-dont">
+        <div class="do-list">
+            <h4>✓ DO</h4>
+            <ul>
+                <li>Use index finger (works best)</li>
+                <li>Sign like they normally would</li>
+                <li>Use the full width of the box</li>
+                <li>Make it big and bold</li>
+                <li>Take their time — no rush</li>
+                <li>Clear and redo if not happy</li>
+                <li>Rest hand on phone for stability</li>
+            </ul>
+        </div>
+        <div class="dont-list">
+            <h4>✗ DON'T</h4>
+            <ul>
+                <li>Write name in plain letters</li>
+                <li>Make it tiny in one corner</li>
+                <li>Rush through it</li>
+                <li>Use pinky (too small)</li>
+                <li>Use thumb (too big/clumsy)</li>
+                <li>Accept a messy signature</li>
+                <li>Press too hard or too light</li>
+            </ul>
+        </div>
+    </div>
+    
+    <h3>Signature Technique</h3>
+    <div class="steps">
+        <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+                <h4>Position the Phone</h4>
+                <p>Hold the phone flat and stable on a surface, or rest it in their non-dominant hand.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+                <h4>Rest Their Hand</h4>
+                <p>Have them rest the side of their signing hand on the phone. This provides stability and reduces shakiness.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+                <h4>Use Index Finger Pad</h4>
+                <p>The soft pad of the index finger gives the best control and line thickness.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+                <h4>Sign Smoothly</h4>
+                <p>Apply light, even pressure. Sign in smooth, flowing movements. Fill most of the signature box.</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+                <h4>Review and Redo</h4>
+                <p>Look at it. Happy? Submit. Not happy? Tap "Clear" and try again. No limit on retries.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-box">
+        <h4>💡 Pro Tip: Practice First</h4>
+        <p>If they're struggling, have them sign their name on a piece of paper first. Look at that signature, then copy it on the phone. This helps them visualize what they're trying to create.</p>
+    </div>
+    
+    <h3>Common Signature Problems</h3>
+    <table>
+        <tr>
+            <th>Problem</th>
+            <th>Fix</th>
+        </tr>
+        <tr>
+            <td>Too small</td>
+            <td>Use more of the box — make bigger, bolder strokes</td>
+        </tr>
+        <tr>
+            <td>Shaky lines</td>
+            <td>Slow down, rest hand on phone, relax</td>
+        </tr>
+        <tr>
+            <td>Lines too thin</td>
+            <td>Press slightly firmer with finger</td>
+        </tr>
+        <tr>
+            <td>Doesn't look like real signature</td>
+            <td>Practice on paper first, then copy it</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PAGE 10: FAQ -->
+<div class="page">
+    <h2>Frequently Asked Questions</h2>
+    
+    <p>Common questions customers ask and how to answer them:</p>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: How much does it cost?</div>
+        <div class="faq-a">A: $70 AUD, one-time payment. No subscriptions or recurring fees.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: Does it work on Android?</div>
+        <div class="faq-a">A: No, iPhone only at this time. Android is not supported.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: Does it work on iPad?</div>
+        <div class="faq-a">A: No, iPhone only. iPads are not supported.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: Can I pay with card online?</div>
+        <div class="faq-a">A: No, payment is through authorized distributors only. You pay the distributor $70 cash and receive a payment code.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: What if I get a new phone?</div>
+        <div class="faq-a">A: Contact support. We can reset your device binding so you can log in on your new phone.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: Can I change my photo or details later?</div>
+        <div class="faq-a">A: No. Once you submit your identity, everything is permanently locked. Make sure you're happy with everything before submitting.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: I made a mistake in my details. Can I fix it?</div>
+        <div class="faq-a">A: Contact support. We can reset your identity so you can start over, but you'll have to re-enter everything.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: Can my friend/family use my account on their phone?</div>
+        <div class="faq-a">A: No. Each account is permanently locked to one phone only. They need their own account and payment code.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: I forgot my password.</div>
+        <div class="faq-a">A: Use the "Forgot Password" link on the website login page to reset it.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: How long until I'm approved?</div>
+        <div class="faq-a">A: Usually within 24-48 hours. We manually review each application.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: Why do I need to be approved?</div>
+        <div class="faq-a">A: We manually review every customer to ensure security and prevent misuse of the system.</div>
+    </div>
+    
+    <div class="faq-item">
+        <div class="faq-q">Q: My payment code isn't working.</div>
+        <div class="faq-a">A: Make sure you're entering all 12 characters including the dashes. Codes are case-insensitive. If it still doesn't work, contact the distributor who gave you the code.</div>
+    </div>
+</div>
+
+<!-- PAGE 11: QUICK REFERENCE -->
+<div class="page">
+    <h2>Quick Reference Card</h2>
+    
+    <div class="quick-ref">
+        <h3>💰 Pricing</h3>
+        <ul>
+            <li><strong>$70 AUD</strong> per customer (cash only, payment codes)</li>
+        </ul>
+    </div>
+    
+    <div class="quick-ref">
+        <h3>📱 Requirements</h3>
+        <ul>
+            <li>iPhone only (no Android, no iPad)</li>
+            <li>Valid email address</li>
+            <li>Payment code from authorized distributor</li>
+        </ul>
+    </div>
+    
+    <div class="quick-ref">
+        <h3>📋 Your Process</h3>
+        <ul>
+            <li>1. Collect $70 cash from customer</li>
+            <li>2. Log into Admin Panel → Payment Codes</li>
+            <li>3. Add customer name to notes (recommended)</li>
+            <li>4. Click "Generate Code"</li>
+            <li>5. Give code to customer (write/text/photo)</li>
+        </ul>
+    </div>
+    
+    <div class="quick-ref">
+        <h3>🔐 Key Security Rules</h3>
+        <ul>
+            <li>One code = One customer (codes work once only)</li>
+            <li>One account = One phone (no device sharing)</li>
+            <li>Once submitted = Locked forever (no edits)</li>
+            <li>No self-service resets (must contact support)</li>
+        </ul>
+    </div>
+    
+    <div class="quick-ref">
+        <h3>📸 Photo Checklist</h3>
+        <ul>
+            <li>✓ Face camera straight on</li>
+            <li>✓ Neutral expression</li>
+            <li>✓ Good lighting on face</li>
+            <li>✓ Plain background</li>
+            <li>✓ No sunglasses or hats</li>
+            <li>✓ Head and shoulders visible</li>
+        </ul>
+    </div>
+    
+    <div class="quick-ref">
+        <h3>✍️ Signature Checklist</h3>
+        <ul>
+            <li>✓ Use index finger</li>
+            <li>✓ Fill the whole box (make it big)</li>
+            <li>✓ Sign like normal signature</li>
+            <li>✓ Take your time</li>
+            <li>✓ Redo if not happy</li>
+        </ul>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px; padding: 20px; background: #f8fafc; border-radius: 12px;">
+        <p style="margin: 0; color: #64748b; font-size: 14px;">
+            <strong>Questions?</strong> Contact your manager or admin support.
+        </p>
+    </div>
+</div>
+
+</body>
+</html>
