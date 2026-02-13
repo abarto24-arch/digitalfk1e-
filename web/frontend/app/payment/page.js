@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
+// Hardcoded for reliability - change this when backend URL changes
+const API_URL = 'https://chic-unity-production-e222.up.railway.app';
 const BETA_PRICE = '$49.99'; // Display price
 
 export default function Payment() {
