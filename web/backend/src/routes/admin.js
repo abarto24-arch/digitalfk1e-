@@ -207,7 +207,7 @@ router.post('/users/:userId/approve', auth, adminAuth, async (req, res) => {
       [userId]
     );
 
-    await logAudit(userId, 'USER_APPROVED', { approvedBy: req.user.userId });
+    await logAudit(userId, 'USER_APPROVED', { approvedBy: req.user.adminId || req.user.userId });
 
     res.json({
       message: 'User approved',
@@ -235,7 +235,7 @@ router.post('/users/:userId/reject', auth, adminAuth, async (req, res) => {
       [userId]
     );
 
-    await logAudit(userId, 'USER_REJECTED', { rejectedBy: req.user.userId, reason });
+    await logAudit(userId, 'USER_REJECTED', { rejectedBy: req.user.adminId || req.user.userId, reason });
 
     res.json({ message: 'User rejected', userId });
 
@@ -255,7 +255,7 @@ router.post('/users/:userId/reset-device', auth, adminAuth, async (req, res) => 
 
     await pool.query('DELETE FROM devices WHERE user_id = $1', [userId]);
 
-    await logAudit(userId, 'DEVICE_RESET', { resetBy: req.user.userId });
+    await logAudit(userId, 'DEVICE_RESET', { resetBy: req.user.adminId || req.user.userId });
 
     res.json({ message: 'Device binding reset', userId });
 
@@ -344,7 +344,7 @@ router.post('/users/:userId/reset-identity', auth, adminAuth, async (req, res) =
     await pool.query('DELETE FROM identity_profiles WHERE user_id = $1', [userId]);
 
     await logAudit(userId, 'IDENTITY_RESET', { 
-      resetBy: req.user.userId, 
+      resetBy: req.user.adminId || req.user.userId, 
       reason: reason || 'Admin reset' 
     });
 
@@ -470,12 +470,12 @@ router.post('/payment-codes/generate', auth, adminAuth, async (req, res) => {
       `INSERT INTO payment_codes (code, created_by, notes, expires_at)
        VALUES ($1, $2, $3, $4)
        RETURNING id, code, status, created_at, expires_at, notes`,
-      [code, req.user.userId, notes || null, expiresAt]
+      [code, req.user.adminId || req.user.userId, notes || null, expiresAt]
     );
 
     await logAudit(null, 'PAYMENT_CODE_GENERATED', { 
       code, 
-      generatedBy: req.user.userId,
+      generatedBy: req.user.adminId || req.user.userId,
       notes 
     });
 
@@ -561,7 +561,7 @@ router.post('/payment-codes/:codeId/revoke', auth, adminAuth, async (req, res) =
 
     await logAudit(null, 'PAYMENT_CODE_REVOKED', { 
       code: result.rows[0].code, 
-      revokedBy: req.user.userId 
+      revokedBy: req.user.adminId || req.user.userId 
     });
 
     res.json({ message: 'Payment code revoked' });
@@ -595,7 +595,7 @@ router.post('/users/:userId/change-device', auth, adminAuth, async (req, res) =>
       
       await logAudit(userId, 'DEVICE_CHANGED', { 
         newDeviceUUID, 
-        changedBy: req.user.userId, 
+        changedBy: req.user.adminId || req.user.userId, 
         reason 
       });
     } else {
@@ -603,7 +603,7 @@ router.post('/users/:userId/change-device', auth, adminAuth, async (req, res) =>
       await pool.query('DELETE FROM devices WHERE user_id = $1', [userId]);
       
       await logAudit(userId, 'DEVICE_RESET', { 
-        resetBy: req.user.userId, 
+        resetBy: req.user.adminId || req.user.userId,
         reason 
       });
     }
