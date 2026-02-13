@@ -53,9 +53,11 @@ export default function Signup() {
     setLoading(true);
 
     try {
+      console.log('Calling API:', API_URL);
       const res = await fetch(`${API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        mode: 'cors',
         body: JSON.stringify({
           fullName: formData.fullName,
           email: formData.email,
@@ -63,7 +65,16 @@ export default function Signup() {
         })
       });
 
-      const data = await res.json();
+      console.log('Response status:', res.status);
+      
+      const text = await res.text();
+      console.log('Response text:', text);
+      
+      if (!text) {
+        throw new Error('Empty response from server');
+      }
+      
+      const data = JSON.parse(text);
 
       if (!res.ok) {
         throw new Error(data.error || 'Signup failed');
