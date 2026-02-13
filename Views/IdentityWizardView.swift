@@ -1,614 +1,684 @@
-/**
- * Identity Wizard View
- * Step-by-step identity creation for Digital ID (one-time only)
- */
+//
+//  IdentityWizardView.swift
+//  DigitalID
+//
+//  Identity setup wizard - one-time upload flow
+//
 
 import SwiftUI
 import PhotosUI
 
 struct IdentityWizardView: View {
-    @State private var currentStep = 1
-    @State private var isLoading = false
-    @State private var errorMessage: String?
-    @State private var showError = false
-    @State private var showSealConfirmation = false
-    
-    // Form data
-    @State private var fullName = ""
-    @State private var dateOfBirth = Date()
-    @State private var addressLine1 = ""
-    @State private var suburb = ""
-    @State private var state = "VIC"
-    @State private var postcode = ""
-    @State private var licenceNumber = ""
-    @State private var licenceState = "VIC"
-    @State private var selectedPhoto: UIImage?
-    @State private var signatureImage: UIImage?
-    
-    @State private var showImagePicker = false
-    @State private var showSignaturePad = false
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel = IdentityWizardViewModel()
     
     var onComplete: () -> Void
     
-    private let states = ["VIC", "NSW", "QLD", "SA", "WA", "TAS", "NT", "ACT"]
-    
     var body: some View {
-        GeometryReader { geometry in
-            let baseWidth: CGFloat = 393
-            func s(_ value: CGFloat) -> CGFloat {
-                return value * (geometry.size.width / baseWidth)
-            }
-            
+        NavigationView {
             ZStack {
-                // Background
-                LinearGradient(
-                    colors: [Color(hex: "1A252F"), Color(hex: "253443")],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
+                Color(hex: "F2F4F3")
+                    .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
-                    // Header
-                    VStack(spacing: s(16)) {
-                        // Progress indicator
-                        HStack(spacing: s(4)) {
-                            ForEach(1...6, id: \.self) { step in
-                                Capsule()
-                                    .fill(step <= currentStep ? Color(hex: "0A5E37") : Color.white.opacity(0.2))
-                                    .frame(height: s(4))
-                            }
-                        }
-                        .padding(.horizontal, s(24))
-                        
-                        Text(stepTitle)
-                            .font(Font.vicSemiBold(size: s(20)))
-                            .foregroundColor(.white)
-                        
-                        Text(stepSubtitle)
-                            .font(Font.vicRegular(size: s(14)))
-                            .foregroundColor(.white.opacity(0.6))
-                            .multilineTextAlignment(.center)
-                            .padding(.horizontal, s(24))
-                    }
-                    .padding(.top, s(20))
-                    .padding(.bottom, s(24))
+                    // Progress indicator
+                    ProgressView(value: Double(viewModel.currentStep), total: Double(viewModel.totalSteps))
+                        .progressViewStyle(LinearProgressViewStyle(tint: Color(hex: "253443")))
+                        .padding(.horizontal, 24)
+                        .padding(.top, 16)
+                    
+                    Text("Step \(viewModel.currentStep) of \(viewModel.totalSteps)")
+                        .font(.system(size: 14))
+                        .foregroundColor(Color(hex: "8E8E93"))
+                        .padding(.top, 8)
                     
                     // Content
                     ScrollView {
-                        VStack(spacing: s(20)) {
-                            stepContent(s: s)
+                        VStack(spacing: 24) {
+                            stepContent
                         }
-                        .padding(s(24))
+                        .padding(24)
                     }
                     
-                    // Bottom buttons
-                    HStack(spacing: s(16)) {
-                        if currentStep > 1 {
-                            Button(action: { currentStep -= 1 }) {
+                    // Navigation buttons
+                    HStack(spacing: 16) {
+                        if viewModel.currentStep > 1 {
+                            Button(action: viewModel.previousStep) {
                                 Text("Back")
-                                    .font(Font.vicMedium(size: s(16)))
-                                    .foregroundColor(.white)
+                                    .font(.system(size: 17, weight: .medium))
                                     .frame(maxWidth: .infinity)
-                                    .frame(height: s(50))
-                                    .background(Color.white.opacity(0.1))
-                                    .cornerRadius(s(12))
+                                    .padding(.vertical, 16)
+                                    .background(Color.white)
+                                    .foregroundColor(Color(hex: "253443"))
+                                    .cornerRadius(12)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color(hex: "253443"), lineWidth: 1)
+                                    )
                             }
                         }
                         
                         Button(action: handleNext) {
                             HStack {
-                                if isLoading {
+                                if viewModel.isLoading {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                 } else {
-                                    Text(currentStep == 6 ? "SEAL MY ID" : "Continue")
-                                        .font(Font.vicSemiBold(size: s(16)))
+                                    Text(viewModel.currentStep == viewModel.totalSteps ? "Seal Identity" : "Continue")
+                                        .font(.system(size: 17, weight: .semibold))
                                 }
                             }
-                            .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: s(50))
-                            .background(currentStep == 6 ? Color(hex: "DF3425") : Color(hex: "0A5E37"))
-                            .cornerRadius(s(12))
+                            .padding(.vertical, 16)
+                            .background(viewModel.canProceed ? Color(hex: "253443") : Color(hex: "C7C7CC"))
+                            .foregroundColor(.white)
+                            .cornerRadius(12)
                         }
-                        .disabled(isLoading || !canProceed)
-                        .opacity((isLoading || !canProceed) ? 0.6 : 1)
+                        .disabled(!viewModel.canProceed || viewModel.isLoading)
                     }
-                    .padding(s(24))
-                    .background(Color(hex: "1A252F"))
+                    .padding(24)
                 }
             }
-            .sheet(isPresented: $showImagePicker) {
-                ImagePickerView(image: $selectedPhoto)
+            .navigationTitle("Set Up Identity")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") { dismiss() }
+                }
             }
-            .sheet(isPresented: $showSignaturePad) {
-                SignaturePadView(signatureImage: $signatureImage)
-            }
-            .alert("Error", isPresented: $showError) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text(errorMessage ?? "Unknown error")
-            }
-            .alert("Seal Your Identity?", isPresented: $showSealConfirmation) {
-                Button("Cancel", role: .cancel) {}
-                Button("SEAL", role: .destructive) {
+            .alert("Seal Identity?", isPresented: $viewModel.showSealConfirmation) {
+                Button("Cancel", role: .cancel) { }
+                Button("Seal", role: .destructive) {
                     sealIdentity()
                 }
             } message: {
-                Text("⚠️ WARNING: This action is permanent and cannot be undone. Your identity details will be locked forever. Make sure all information is correct.")
+                Text("Once sealed, your identity cannot be changed. This action is permanent.")
+            }
+            .alert("Error", isPresented: $viewModel.showError) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text(viewModel.errorMessage ?? "An error occurred")
             }
         }
     }
     
-    private var stepTitle: String {
-        switch currentStep {
-        case 1: return "Your Name & Date of Birth"
-        case 2: return "Your Address"
-        case 3: return "Licence Details"
-        case 4: return "Photo"
-        case 5: return "Signature"
-        case 6: return "Review & Seal"
-        default: return ""
+    @ViewBuilder
+    private var stepContent: some View {
+        switch viewModel.currentStep {
+        case 1:
+            personalInfoStep
+        case 2:
+            addressStep
+        case 3:
+            licenceStep
+        case 4:
+            photoStep
+        case 5:
+            signatureStep
+        case 6:
+            reviewStep
+        default:
+            EmptyView()
         }
     }
     
-    private var stepSubtitle: String {
-        switch currentStep {
-        case 1: return "Enter your name exactly as it appears on your licence"
-        case 2: return "Enter your residential address"
-        case 3: return "Enter your licence information"
-        case 4: return "Take or upload a photo for your Digital ID"
-        case 5: return "Sign your name for verification"
-        case 6: return "Review all details before sealing"
-        default: return ""
+    // MARK: - Step 1: Personal Info
+    private var personalInfoStep: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Personal Information")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(Color(hex: "253443"))
+            
+            Text("Enter your details exactly as they appear on your official ID.")
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "8E8E93"))
+            
+            formField(title: "Full Legal Name", text: $viewModel.fullName, placeholder: "e.g. JOHN SMITH")
+                .textInputAutocapitalization(.characters)
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Date of Birth")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(Color(hex: "253443"))
+                
+                DatePicker("", selection: $viewModel.dateOfBirth, in: ...Calendar.current.date(byAdding: .year, value: -16, to: Date())!, displayedComponents: .date)
+                    .datePickerStyle(.compact)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+                
+                Text("Must be at least 16 years old")
+                    .font(.system(size: 12))
+                    .foregroundColor(Color(hex: "8E8E93"))
+            }
         }
     }
     
-    private var canProceed: Bool {
+    // MARK: - Step 2: Address
+    private var addressStep: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Address")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(Color(hex: "253443"))
+            
+            Text("Enter your current residential address.")
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "8E8E93"))
+            
+            formField(title: "Street Address", text: $viewModel.addressLine1, placeholder: "e.g. 123 MAIN ST")
+                .textInputAutocapitalization(.characters)
+            
+            formField(title: "Suburb", text: $viewModel.suburb, placeholder: "e.g. MELBOURNE")
+                .textInputAutocapitalization(.characters)
+            
+            HStack(spacing: 16) {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("State")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Color(hex: "253443"))
+                    
+                    Picker("State", selection: $viewModel.state) {
+                        ForEach(["VIC", "NSW", "QLD", "SA", "WA", "TAS", "NT", "ACT"], id: \.self) {
+                            Text($0)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+                }
+                
+                formField(title: "Postcode", text: $viewModel.postcode, placeholder: "3000")
+                    .keyboardType(.numberPad)
+            }
+        }
+    }
+    
+    // MARK: - Step 3: Licence Details
+    private var licenceStep: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Licence Details")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(Color(hex: "253443"))
+            
+            Text("Enter your driver's licence information.")
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "8E8E93"))
+            
+            formField(title: "Licence Number", text: $viewModel.licenceNumber, placeholder: "e.g. 050610959")
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Licence Type")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(Color(hex: "253443"))
+                
+                Picker("Type", selection: $viewModel.licenceType) {
+                    Text("Learner (L)").tag("L")
+                    Text("Probationary 1 (P1)").tag("P1")
+                    Text("Probationary 2 (P2)").tag("P2")
+                    Text("Full").tag("Full")
+                }
+                .pickerStyle(.segmented)
+                .onChange(of: viewModel.licenceType) { _, newType in
+                    viewModel.updateDatesForLicenceType(newType)
+                }
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Issue Date")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(Color(hex: "253443"))
+                
+                DatePicker("", selection: $viewModel.issueDate, in: ...Date(), displayedComponents: .date)
+                    .datePickerStyle(.compact)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+                
+                Text("When your licence was issued")
+                    .font(.system(size: 12))
+                    .foregroundColor(Color(hex: "8E8E93"))
+            }
+            
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Expiry Date")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(Color(hex: "253443"))
+                
+                DatePicker("", selection: $viewModel.expiryDate, in: Date()..., displayedComponents: .date)
+                    .datePickerStyle(.compact)
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(12)
+                
+                Text("Must be a future date")
+                    .font(.system(size: 12))
+                    .foregroundColor(Color(hex: "8E8E93"))
+            }
+            
+            if viewModel.licenceType == "P2" || viewModel.licenceType == "P1" {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("\(viewModel.licenceType) End Date")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(Color(hex: "253443"))
+                    
+                    DatePicker("", selection: $viewModel.p2EndDate, in: Date()..., displayedComponents: .date)
+                        .datePickerStyle(.compact)
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(12)
+                    
+                    Text("When your \(viewModel.licenceType) period ends")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color(hex: "8E8E93"))
+                }
+            }
+        }
+    }
+    
+    // MARK: - Step 4: Photo
+    private var photoStep: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Photo")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(Color(hex: "253443"))
+            
+            Text("Upload a clear photo for your digital ID.")
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "8E8E93"))
+            
+            PhotosPicker(selection: $viewModel.selectedPhotoItem, matching: .images) {
+                if let image = viewModel.photoImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 200, height: 260)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .frame(maxWidth: .infinity)
+                } else {
+                    VStack(spacing: 16) {
+                        Image(systemName: "camera.fill")
+                            .font(.system(size: 40))
+                            .foregroundColor(Color(hex: "8E8E93"))
+                        
+                        Text("Tap to add photo")
+                            .font(.system(size: 16))
+                            .foregroundColor(Color(hex: "8E8E93"))
+                    }
+                    .frame(width: 200, height: 260)
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(style: StrokeStyle(lineWidth: 2, dash: [8]))
+                            .foregroundColor(Color(hex: "C7C7CC"))
+                    )
+                    .frame(maxWidth: .infinity)
+                }
+            }
+            .onChange(of: viewModel.selectedPhotoItem) { _, newItem in
+                Task {
+                    if let data = try? await newItem?.loadTransferable(type: Data.self),
+                       let image = UIImage(data: data) {
+                        viewModel.photoImage = image
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK: - Step 5: Signature
+    private var signatureStep: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Signature")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(Color(hex: "253443"))
+            
+            Text("Draw your signature below.")
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "8E8E93"))
+            
+            SignatureCanvasView(signatureImage: $viewModel.signatureImage)
+                .frame(height: 200)
+                .background(Color.white)
+                .cornerRadius(12)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color(hex: "C7C7CC"), lineWidth: 1)
+                )
+            
+            Button(action: { viewModel.signatureImage = nil }) {
+                HStack {
+                    Image(systemName: "arrow.counterclockwise")
+                    Text("Clear Signature")
+                }
+                .font(.system(size: 14))
+                .foregroundColor(Color(hex: "DF3425"))
+            }
+        }
+    }
+    
+    // MARK: - Step 6: Review
+    private var reviewStep: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            Text("Review & Seal")
+                .font(.system(size: 24, weight: .bold))
+                .foregroundColor(Color(hex: "253443"))
+            
+            Text("Review your information carefully. Once sealed, it cannot be changed.")
+                .font(.system(size: 16))
+                .foregroundColor(Color(hex: "8E8E93"))
+            
+            // Summary card
+            VStack(alignment: .leading, spacing: 16) {
+                reviewRow(label: "Name", value: viewModel.fullName)
+                reviewRow(label: "Date of Birth", value: viewModel.formattedDOB)
+                reviewRow(label: "Address", value: "\(viewModel.addressLine1)\n\(viewModel.suburb) \(viewModel.state) \(viewModel.postcode)")
+                reviewRow(label: "Licence", value: "\(viewModel.licenceNumber) (\(viewModel.licenceType))")
+                reviewRow(label: "Expiry", value: viewModel.formattedExpiry)
+                
+                HStack {
+                    if let image = viewModel.photoImage {
+                        VStack {
+                            Text("Photo")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color(hex: "8E8E93"))
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 60, height: 80)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    if let sig = viewModel.signatureImage {
+                        VStack {
+                            Text("Signature")
+                                .font(.system(size: 14))
+                                .foregroundColor(Color(hex: "8E8E93"))
+                            Image(uiImage: sig)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 100, height: 50)
+                        }
+                    }
+                }
+            }
+            .padding(16)
+            .background(Color.white)
+            .cornerRadius(12)
+            
+            // Warning
+            HStack(spacing: 12) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundColor(.orange)
+                
+                Text("Once sealed, your identity becomes permanent and cannot be edited.")
+                    .font(.system(size: 14))
+                    .foregroundColor(Color(hex: "253443"))
+            }
+            .padding(16)
+            .background(Color.orange.opacity(0.1))
+            .cornerRadius(12)
+        }
+    }
+    
+    // MARK: - Helpers
+    private func formField(title: String, text: Binding<String>, placeholder: String) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.system(size: 14, weight: .medium))
+                .foregroundColor(Color(hex: "253443"))
+            
+            TextField(placeholder, text: text)
+                .padding()
+                .background(Color.white)
+                .cornerRadius(12)
+        }
+    }
+    
+    private func reviewRow(label: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(label)
+                .font(.system(size: 14))
+                .foregroundColor(Color(hex: "8E8E93"))
+            Text(value)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(Color(hex: "253443"))
+        }
+    }
+    
+    private func handleNext() {
+        if viewModel.currentStep == viewModel.totalSteps {
+            viewModel.showSealConfirmation = true
+        } else {
+            viewModel.nextStep()
+        }
+    }
+    
+    private func sealIdentity() {
+        viewModel.isLoading = true
+        
+        Task {
+            do {
+                // Save draft first (with photo and signature as base64)
+                try await APIService.shared.saveDraft(identity: viewModel.toDict())
+                // Then seal
+                _ = try await APIService.shared.sealIdentity()
+                
+                await MainActor.run {
+                    viewModel.isLoading = false
+                    onComplete()
+                }
+            } catch {
+                await MainActor.run {
+                    viewModel.isLoading = false
+                    viewModel.errorMessage = error.localizedDescription
+                    viewModel.showError = true
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Signature Canvas View
+struct SignatureCanvasView: View {
+    @Binding var signatureImage: UIImage?
+    @State private var lines: [[CGPoint]] = []
+    @State private var currentLine: [CGPoint] = []
+    
+    var body: some View {
+        GeometryReader { geometry in
+            Canvas { context, size in
+                for line in lines {
+                    var path = Path()
+                    if let first = line.first {
+                        path.move(to: first)
+                        for point in line.dropFirst() {
+                            path.addLine(to: point)
+                        }
+                    }
+                    context.stroke(path, with: .color(.black), lineWidth: 2)
+                }
+                
+                // Current line
+                var currentPath = Path()
+                if let first = currentLine.first {
+                    currentPath.move(to: first)
+                    for point in currentLine.dropFirst() {
+                        currentPath.addLine(to: point)
+                    }
+                }
+                context.stroke(currentPath, with: .color(.black), lineWidth: 2)
+            }
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        currentLine.append(value.location)
+                    }
+                    .onEnded { _ in
+                        lines.append(currentLine)
+                        currentLine = []
+                        renderSignature(size: geometry.size)
+                    }
+            )
+            .onChange(of: signatureImage) { _, newValue in
+                if newValue == nil {
+                    lines = []
+                    currentLine = []
+                }
+            }
+        }
+    }
+    
+    private func renderSignature(size: CGSize) {
+        let renderer = UIGraphicsImageRenderer(size: size)
+        let image = renderer.image { ctx in
+            ctx.cgContext.setFillColor(UIColor.white.cgColor)
+            ctx.cgContext.fill(CGRect(origin: .zero, size: size))
+            
+            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
+            ctx.cgContext.setLineWidth(2)
+            ctx.cgContext.setLineCap(.round)
+            
+            for line in lines {
+                if let first = line.first {
+                    ctx.cgContext.move(to: first)
+                    for point in line.dropFirst() {
+                        ctx.cgContext.addLine(to: point)
+                    }
+                    ctx.cgContext.strokePath()
+                }
+            }
+        }
+        signatureImage = image
+    }
+}
+
+// MARK: - View Model
+class IdentityWizardViewModel: ObservableObject {
+    @Published var currentStep = 1
+    let totalSteps = 6
+    
+    // Personal Info
+    @Published var fullName = ""
+    @Published var dateOfBirth = Calendar.current.date(byAdding: .year, value: -18, to: Date()) ?? Date()
+    
+    // Address
+    @Published var addressLine1 = ""
+    @Published var suburb = ""
+    @Published var state = "VIC"
+    @Published var postcode = ""
+    
+    // Licence
+    @Published var licenceNumber = ""
+    @Published var licenceType = "P2"
+    @Published var issueDate = Date()
+    @Published var expiryDate = Calendar.current.date(byAdding: .year, value: 3, to: Date()) ?? Date()
+    @Published var p2EndDate = Calendar.current.date(byAdding: .year, value: 3, to: Date()) ?? Date()
+    
+    // Photo & Signature
+    @Published var selectedPhotoItem: PhotosPickerItem?
+    @Published var photoImage: UIImage?
+    @Published var signatureImage: UIImage?
+    
+    // State
+    @Published var isLoading = false
+    @Published var showSealConfirmation = false
+    @Published var showError = false
+    @Published var errorMessage: String?
+    
+    var formattedDOB: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: dateOfBirth)
+    }
+    
+    var formattedExpiry: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy"
+        return formatter.string(from: expiryDate)
+    }
+    
+    var canProceed: Bool {
         switch currentStep {
         case 1: return !fullName.isEmpty
-        case 2: return !addressLine1.isEmpty && !suburb.isEmpty && !postcode.isEmpty
-        case 3: return !licenceNumber.isEmpty
-        case 4: return selectedPhoto != nil
+        case 2: return !addressLine1.isEmpty && !suburb.isEmpty && !postcode.isEmpty && postcode.count == 4
+        case 3: return !licenceNumber.isEmpty && expiryDate > Date() && issueDate <= Date()
+        case 4: return photoImage != nil
         case 5: return signatureImage != nil
         case 6: return true
         default: return false
         }
     }
     
-    @ViewBuilder
-    private func stepContent(s: (CGFloat) -> CGFloat) -> some View {
-        switch currentStep {
-        case 1:
-            // Name & DOB
-            VStack(spacing: s(20)) {
-                VStack(alignment: .leading, spacing: s(8)) {
-                    Text("Full Name")
-                        .font(Font.vicMedium(size: s(14)))
-                        .foregroundColor(.white.opacity(0.8))
-                    
-                    TextField("", text: $fullName)
-                        .textFieldStyle(WizardTextFieldStyle())
-                        .textContentType(.name)
-                        .autocapitalization(.allCharacters)
-                }
-                
-                VStack(alignment: .leading, spacing: s(8)) {
-                    Text("Date of Birth")
-                        .font(Font.vicMedium(size: s(14)))
-                        .foregroundColor(.white.opacity(0.8))
-                    
-                    DatePicker("", selection: $dateOfBirth, displayedComponents: .date)
-                        .datePickerStyle(.wheel)
-                        .labelsHidden()
-                        .colorScheme(.dark)
-                }
-            }
-            
-        case 2:
-            // Address
-            VStack(spacing: s(20)) {
-                VStack(alignment: .leading, spacing: s(8)) {
-                    Text("Address Line")
-                        .font(Font.vicMedium(size: s(14)))
-                        .foregroundColor(.white.opacity(0.8))
-                    
-                    TextField("", text: $addressLine1)
-                        .textFieldStyle(WizardTextFieldStyle())
-                        .textContentType(.streetAddressLine1)
-                        .autocapitalization(.allCharacters)
-                }
-                
-                HStack(spacing: s(12)) {
-                    VStack(alignment: .leading, spacing: s(8)) {
-                        Text("Suburb")
-                            .font(Font.vicMedium(size: s(14)))
-                            .foregroundColor(.white.opacity(0.8))
-                        
-                        TextField("", text: $suburb)
-                            .textFieldStyle(WizardTextFieldStyle())
-                            .textContentType(.addressCity)
-                            .autocapitalization(.allCharacters)
-                    }
-                    
-                    VStack(alignment: .leading, spacing: s(8)) {
-                        Text("State")
-                            .font(Font.vicMedium(size: s(14)))
-                            .foregroundColor(.white.opacity(0.8))
-                        
-                        Picker("", selection: $state) {
-                            ForEach(states, id: \.self) { Text($0) }
-                        }
-                        .pickerStyle(.menu)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: s(50))
-                        .background(Color.white.opacity(0.05))
-                        .cornerRadius(s(12))
-                    }
-                    .frame(width: s(100))
-                }
-                
-                VStack(alignment: .leading, spacing: s(8)) {
-                    Text("Postcode")
-                        .font(Font.vicMedium(size: s(14)))
-                        .foregroundColor(.white.opacity(0.8))
-                    
-                    TextField("", text: $postcode)
-                        .textFieldStyle(WizardTextFieldStyle())
-                        .textContentType(.postalCode)
-                        .keyboardType(.numberPad)
-                }
-            }
-            
-        case 3:
-            // Licence
-            VStack(spacing: s(20)) {
-                VStack(alignment: .leading, spacing: s(8)) {
-                    Text("Licence Number")
-                        .font(Font.vicMedium(size: s(14)))
-                        .foregroundColor(.white.opacity(0.8))
-                    
-                    TextField("", text: $licenceNumber)
-                        .textFieldStyle(WizardTextFieldStyle())
-                        .keyboardType(.numberPad)
-                }
-                
-                VStack(alignment: .leading, spacing: s(8)) {
-                    Text("State Issued")
-                        .font(Font.vicMedium(size: s(14)))
-                        .foregroundColor(.white.opacity(0.8))
-                    
-                    Picker("", selection: $licenceState) {
-                        ForEach(states, id: \.self) { Text($0) }
-                    }
-                    .pickerStyle(.segmented)
-                }
-            }
-            
-        case 4:
-            // Photo
-            VStack(spacing: s(20)) {
-                if let photo = selectedPhoto {
-                    Image(uiImage: photo)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: s(200), height: s(260))
-                        .clipShape(RoundedRectangle(cornerRadius: s(12)))
-                } else {
-                    RoundedRectangle(cornerRadius: s(12))
-                        .fill(Color.white.opacity(0.1))
-                        .frame(width: s(200), height: s(260))
-                        .overlay(
-                            VStack(spacing: s(12)) {
-                                Image(systemName: "person.fill")
-                                    .font(.system(size: s(48)))
-                                    .foregroundColor(.white.opacity(0.4))
-                                Text("No photo")
-                                    .font(Font.vicRegular(size: s(14)))
-                                    .foregroundColor(.white.opacity(0.4))
-                            }
-                        )
-                }
-                
-                Button(action: { showImagePicker = true }) {
-                    Label(selectedPhoto == nil ? "Take Photo" : "Change Photo", systemImage: "camera")
-                        .font(Font.vicMedium(size: s(16)))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: s(50))
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(s(12))
-                }
-            }
-            
-        case 5:
-            // Signature
-            VStack(spacing: s(20)) {
-                if let sig = signatureImage {
-                    Image(uiImage: sig)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: s(120))
-                        .padding(s(20))
-                        .background(Color.white)
-                        .cornerRadius(s(12))
-                } else {
-                    RoundedRectangle(cornerRadius: s(12))
-                        .fill(Color.white)
-                        .frame(height: s(120))
-                        .overlay(
-                            Text("Tap to sign")
-                                .font(Font.vicRegular(size: s(16)))
-                                .foregroundColor(.gray)
-                        )
-                }
-                
-                Button(action: { showSignaturePad = true }) {
-                    Label(signatureImage == nil ? "Sign" : "Re-sign", systemImage: "pencil")
-                        .font(Font.vicMedium(size: s(16)))
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: s(50))
-                        .background(Color.white.opacity(0.1))
-                        .cornerRadius(s(12))
-                }
-            }
-            
-        case 6:
-            // Review
-            VStack(spacing: s(16)) {
-                // Warning
-                HStack {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .foregroundColor(Color(hex: "DF3425"))
-                    Text("This action is permanent")
-                        .font(Font.vicMedium(size: s(14)))
-                        .foregroundColor(Color(hex: "DF3425"))
-                }
-                .padding(s(16))
-                .frame(maxWidth: .infinity)
-                .background(Color(hex: "DF3425").opacity(0.1))
-                .cornerRadius(s(12))
-                
-                // Preview card
-                VStack(alignment: .leading, spacing: s(12)) {
-                    if let photo = selectedPhoto {
-                        HStack {
-                            Image(uiImage: photo)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: s(80), height: s(100))
-                                .clipShape(RoundedRectangle(cornerRadius: s(8)))
-                            
-                            VStack(alignment: .leading, spacing: s(4)) {
-                                Text(fullName)
-                                    .font(Font.vicSemiBold(size: s(18)))
-                                    .foregroundColor(.white)
-                                
-                                Text(formatDate(dateOfBirth))
-                                    .font(Font.vicRegular(size: s(14)))
-                                    .foregroundColor(.white.opacity(0.6))
-                            }
-                            Spacer()
-                        }
-                    }
-                    
-                    Divider().background(Color.white.opacity(0.2))
-                    
-                    reviewRow("Address", "\(addressLine1)\n\(suburb) \(state) \(postcode)")
-                    reviewRow("Licence", "\(licenceNumber) (\(licenceState))")
-                }
-                .padding(s(20))
-                .background(Color.white.opacity(0.08))
-                .cornerRadius(s(12))
-            }
-            
+    func updateDatesForLicenceType(_ type: String) {
+        let calendar = Calendar.current
+        switch type {
+        case "L":
+            // Learner: typically 4 years
+            expiryDate = calendar.date(byAdding: .year, value: 4, to: issueDate) ?? Date()
+            p2EndDate = expiryDate
+        case "P1":
+            // P1: 1 year minimum
+            p2EndDate = calendar.date(byAdding: .year, value: 1, to: issueDate) ?? Date()
+            expiryDate = calendar.date(byAdding: .year, value: 4, to: issueDate) ?? Date()
+        case "P2":
+            // P2: 3 years minimum
+            p2EndDate = calendar.date(byAdding: .year, value: 3, to: issueDate) ?? Date()
+            expiryDate = calendar.date(byAdding: .year, value: 4, to: issueDate) ?? Date()
+        case "Full":
+            // Full licence
+            expiryDate = calendar.date(byAdding: .year, value: 10, to: issueDate) ?? Date()
+            p2EndDate = Date()
         default:
-            EmptyView()
+            break
         }
     }
     
-    @ViewBuilder
-    private func reviewRow(_ label: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(label)
-                .font(Font.vicRegular(size: 12))
-                .foregroundColor(.white.opacity(0.5))
-            Text(value)
-                .font(Font.vicMedium(size: 14))
-                .foregroundColor(.white)
-        }
-    }
-    
-    private func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy"
-        return formatter.string(from: date)
-    }
-    
-    private func handleNext() {
-        if currentStep < 6 {
-            saveDraft()
+    func nextStep() {
+        if currentStep < totalSteps {
             currentStep += 1
-        } else {
-            showSealConfirmation = true
         }
     }
     
-    private func saveDraft() {
-        Task {
-            do {
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                
-                let data: [String: Any] = [
-                    "fullName": fullName,
-                    "dateOfBirth": formatter.string(from: dateOfBirth),
-                    "addressLine1": addressLine1,
-                    "suburb": suburb,
-                    "state": state,
-                    "postcode": postcode,
-                    "licenceNumber": licenceNumber,
-                    "licenceState": licenceState
-                ]
-                
-                try await APIService.shared.saveDraft(identity: data)
-            } catch {
-                // Silent fail for draft saves
-                print("Draft save error: \(error)")
-            }
+    func previousStep() {
+        if currentStep > 1 {
+            currentStep -= 1
         }
     }
     
-    private func sealIdentity() {
-        isLoading = true
+    func toDict() -> [String: Any] {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        Task {
-            do {
-                let _ = try await APIService.shared.sealIdentity()
-                await MainActor.run {
-                    isLoading = false
-                    onComplete()
-                }
-            } catch {
-                await MainActor.run {
-                    isLoading = false
-                    errorMessage = error.localizedDescription
-                    showError = true
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Wizard Text Field Style
-struct WizardTextFieldStyle: TextFieldStyle {
-    func _body(configuration: TextField<Self._Label>) -> some View {
-        configuration
-            .padding(16)
-            .background(Color.white.opacity(0.05))
-            .foregroundColor(.white)
-            .cornerRadius(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
-            )
-    }
-}
-
-// MARK: - Image Picker
-struct ImagePickerView: UIViewControllerRepresentable {
-    @Binding var image: UIImage?
-    @Environment(\.dismiss) var dismiss
-    
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        picker.sourceType = .photoLibrary
-        picker.allowsEditing = true
-        return picker
-    }
-    
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-        let parent: ImagePickerView
+        var dict: [String: Any] = [
+            "fullName": fullName.uppercased(),
+            "dateOfBirth": dateFormatter.string(from: dateOfBirth),
+            "addressLine1": addressLine1.uppercased(),
+            "suburb": suburb.uppercased(),
+            "state": state,
+            "postcode": postcode,
+            "licenceNumber": licenceNumber,
+            "licenceType": licenceType,
+            "issueDate": dateFormatter.string(from: issueDate),
+            "expiryDate": dateFormatter.string(from: expiryDate),
+            "p2EndDate": dateFormatter.string(from: p2EndDate),
+            "proficiency": licenceType
+        ]
         
-        init(_ parent: ImagePickerView) {
-            self.parent = parent
+        // Add photo as base64
+        if let photo = photoImage, let photoData = photo.jpegData(compressionQuality: 0.7) {
+            dict["photoBase64"] = "data:image/jpeg;base64," + photoData.base64EncodedString()
         }
         
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let edited = info[.editedImage] as? UIImage {
-                parent.image = edited
-            } else if let original = info[.originalImage] as? UIImage {
-                parent.image = original
-            }
-            parent.dismiss()
+        // Add signature as base64
+        if let sig = signatureImage, let sigData = sig.pngData() {
+            dict["signatureBase64"] = "data:image/png;base64," + sigData.base64EncodedString()
         }
         
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            parent.dismiss()
-        }
-    }
-}
-
-// MARK: - Signature Pad (Placeholder)
-struct SignaturePadView: View {
-    @Binding var signatureImage: UIImage?
-    @Environment(\.dismiss) var dismiss
-    @State private var lines: [[CGPoint]] = []
-    @State private var currentLine: [CGPoint] = []
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                Canvas { context, size in
-                    for line in lines {
-                        var path = Path()
-                        if let first = line.first {
-                            path.move(to: first)
-                            for point in line.dropFirst() {
-                                path.addLine(to: point)
-                            }
-                        }
-                        context.stroke(path, with: .color(.black), lineWidth: 3)
-                    }
-                    
-                    var currentPath = Path()
-                    if let first = currentLine.first {
-                        currentPath.move(to: first)
-                        for point in currentLine.dropFirst() {
-                            currentPath.addLine(to: point)
-                        }
-                    }
-                    context.stroke(currentPath, with: .color(.black), lineWidth: 3)
-                }
-                .background(Color.white)
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { value in
-                            currentLine.append(value.location)
-                        }
-                        .onEnded { _ in
-                            lines.append(currentLine)
-                            currentLine = []
-                        }
-                )
-                .frame(height: 200)
-                .cornerRadius(12)
-                .padding()
-                
-                HStack {
-                    Button("Clear") {
-                        lines = []
-                        currentLine = []
-                    }
-                    .foregroundColor(.red)
-                    
-                    Spacer()
-                    
-                    Button("Done") {
-                        // Convert canvas to image (simplified)
-                        signatureImage = UIImage(systemName: "signature")
-                        dismiss()
-                    }
-                    .fontWeight(.bold)
-                }
-                .padding()
-            }
-            .navigationTitle("Sign Here")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") { dismiss() }
-                }
-            }
-        }
+        return dict
     }
 }

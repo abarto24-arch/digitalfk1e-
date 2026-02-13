@@ -45,60 +45,146 @@ struct MainContentView: View {
     @State private var showLoading = false
     @State private var showLicenceDetail = false
     
+    // Auth state
+    @State private var isLoggedIn = false
+    @State private var needsIdentitySetup = false
+    @State private var showIdentityWizard = false
+    @State private var isCheckingStatus = true
+    
+    // For demo/testing - set to true to skip login
+    private let skipLoginForDemo = false
+    
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Content
-            Group {
-                if showLoading {
-                    LoadingView()
-                } else if showLicenceDetail {
-                    LicenceDetailView(onBack: {
-                        showLicenceDetail = false
-                        selectedTab = 0
-                    })
-                } else {
-                    switch selectedTab {
-                    case 0:
-                        HomeScreen(onLicenceTap: {
-                            showLoading = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                                showLoading = false
-                                showLicenceDetail = true
-                            }
-                        })
-                    case 1:
-                        VehiclesScreen()
-                    case 2:
-                        LicenceListScreen(onLicenceTap: {
-                            showLoading = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                                showLoading = false
-                                showLicenceDetail = true
-                            }
-                        })
-                    case 3:
-                        PaymentsScreen()
-                    case 4:
-                        ProfileScreen()
-                    default:
-                        HomeScreen(onLicenceTap: {
-                            showLoading = true
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                                showLoading = false
-                                showLicenceDetail = true
-                            }
-                        })
+            if isCheckingStatus {
+                // Splash/loading while checking auth
+                ZStack {
+                    Color(hex: "F2F4F3").ignoresSafeArea()
+                    VStack {
+                        Image("vicroads_logo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 60)
+                        ProgressView()
+                            .padding(.top, 20)
                     }
                 }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            // Custom Tab Bar - hide when showing licence detail
-            if !showLicenceDetail && !showLoading {
-                CustomTabBar(selectedTab: $selectedTab)
+            } else if !isLoggedIn && !skipLoginForDemo {
+                // Login screen
+                LoginView(onLoginSuccess: {
+                    checkUserStatus()
+                })
+            } else if needsIdentitySetup {
+                // Identity wizard (first time setup)
+                IdentityWizardView(onComplete: {
+                    needsIdentitySetup = false
+                    showIdentityWizard = false
+                })
+            } else {
+                // Main app content
+                Group {
+                    if showLoading {
+                        LoadingView()
+                    } else if showLicenceDetail {
+                        LicenceDetailView(onBack: {
+                            showLicenceDetail = false
+                            selectedTab = 0
+                        })
+                    } else {
+                        switch selectedTab {
+                        case 0:
+                            HomeScreen(onLicenceTap: {
+                                showLoading = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                    showLoading = false
+                                    showLicenceDetail = true
+                                }
+                            })
+                        case 1:
+                            VehiclesScreen()
+                        case 2:
+                            LicenceListScreen(onLicenceTap: {
+                                showLoading = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                    showLoading = false
+                                    showLicenceDetail = true
+                                }
+                            })
+                        case 3:
+                            PaymentsScreen()
+                        case 4:
+                            ProfileScreen()
+                        default:
+                            HomeScreen(onLicenceTap: {
+                                showLoading = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                    showLoading = false
+                                    showLicenceDetail = true
+                                }
+                            })
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                // Custom Tab Bar - hide when showing licence detail
+                if !showLicenceDetail && !showLoading {
+                    CustomTabBar(selectedTab: $selectedTab)
+                }
             }
         }
         .ignoresSafeArea(.keyboard)
+        .onAppear {
+            checkInitialState()
+        }
+        .sheet(isPresented: $showIdentityWizard) {
+            IdentityWizardView(onComplete: {
+                needsIdentitySetup = false
+                showIdentityWizard = false
+            })
+        }
+    }
+    
+    private func checkInitialState() {
+        // For demo, skip login check
+        if skipLoginForDemo {
+            isCheckingStatus = false
+            isLoggedIn = true
+            return
+        }
+        
+        // Check if user is already logged in
+        if APIService.shared.isLoggedIn {
+            checkUserStatus()
+        } else {
+            isCheckingStatus = false
+            isLoggedIn = false
+        }
+    }
+    
+    private func checkUserStatus() {
+        Task {
+            do {
+                let status = try await APIService.shared.getStatus()
+                
+                await MainActor.run {
+                    isCheckingStatus = false
+                    isLoggedIn = true
+                    
+                    // Check if identity needs setup
+                    if status.identityStatus == "EMPTY" || status.identityStatus == nil {
+                        needsIdentitySetup = true
+                    } else {
+                        needsIdentitySetup = false
+                    }
+                }
+            } catch {
+                await MainActor.run {
+                    isCheckingStatus = false
+                    isLoggedIn = false
+                }
+            }
+        }
     }
 }
 

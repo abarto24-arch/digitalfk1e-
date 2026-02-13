@@ -5,10 +5,11 @@
 
 import Foundation
 import Security
+import UIKit
 
 // MARK: - Configuration
 struct APIConfig {
-    static let baseURL = "http://localhost:3001" // Change for production
+    static let baseURL = "https://chic-unity-production-e222.up.railway.app" // Railway backend
     static let timeout: TimeInterval = 30
 }
 

@@ -23,6 +23,8 @@ targets:
           - "extracted_icons/**"
           - "layoutmockup/**"
           - "decoded_apk/**"
+          - "web/**"
+          - "node_modules/**"
     info:
       path: Info.plist
       properties:

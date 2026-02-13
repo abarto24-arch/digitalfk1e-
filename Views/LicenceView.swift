@@ -13,8 +13,9 @@ import PhotosUI
 struct LicenceScreen: View {
     var onBack: (() -> Void)? = nil
     
-    // Identity Profile - holds all editable data
-    @StateObject private var profile: IdentityProfile = IdentityProfile.sampleProfile()
+    // Identity Profile - holds all editable data (loaded from backend)
+    @StateObject private var profile = IdentityProfile()
+    @State private var hasLoadedFromBackend = false
     
     // Edit mode - when true, fields are tappable
     @State var isEditMode: Bool = false
@@ -777,444 +778,166 @@ struct LicenceScreen: View {
                 }
             }
         }
+        .onAppear {
+            loadProfileFromBackend()
         }
     }
-
-// MARK: - Tab Button with grey pill container style
-
-struct LicenceTabButton: View {
-    let title: String
-    let isSelected: Bool
-    let scale: (CGFloat) -> CGFloat
-    let action: () -> Void
     
-    var body: some View {
-        Button(action: action) {
-                Text(title)
-                .font(Font.vicSemiBold(size: scale(14)))  // Slightly smaller
-                .foregroundColor(isSelected ? .white : Color(hex: "8E8E93"))  // Grey for unselected
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, scale(6))  // Thinner
-                .background(
-                    Capsule()
-                        .fill(isSelected ? Color(hex: "253443") : Color.clear)
-                        .overlay(
-                            // White border on selected tab
-                            Group {
-                                if isSelected {
-                                    Capsule()
-                                        .stroke(Color.white, lineWidth: 1.5)
-                                }
-                            }
-                        )
-                )
-        }
-    }
-}
-
-// MARK: - Licence Info Row - EXACTLY like DetailRow in LicenceDetailsFullView
-
-struct LicenceInfoRow: View {
-    let label: String
-    let value: String
-    
-    var body: some View {
-        HStack {
-            Text(label)
-                .font(Font.vicRegular(size: 14))  // Slightly smaller
-                .foregroundColor(Color(hex: "8E8E93"))
-            
-            Spacer()
-            
-            Text(value)
-                .font(Font.vicSemiBold(size: 14))  // Slightly smaller
-                .foregroundColor(Color(hex: "253443"))
-        }
-        .padding(.vertical, 12)
-        .padding(.horizontal, 20)
-    }
-}
-
-// Remove old SignatureDrawing - using text version instead
-
-
-// MARK: - Police Barcode
-
-struct PoliceBarcode: View {
-    var body: some View {
-        GeometryReader { geo in
-            HStack(spacing: 0) {
-                ForEach(Array(barcodePattern.enumerated()), id: \.offset) { index, element in
-                    if element.isBar {
-                        Rectangle()
-                            .fill(Color.black)
-                            .frame(width: element.width * (geo.size.width / 320))  // Scale to fill width
+    // MARK: - Load Profile from Backend
+    private func loadProfileFromBackend() {
+        guard !hasLoadedFromBackend else { return }
+        
+        Task {
+            do {
+                print("🔄 Loading profile from backend...")
+                let response = try await APIService.shared.getIdentityProfile()
+                
+                await MainActor.run {
+                    hasLoadedFromBackend = true
+                    
+                    if let data = response.profile {
+                        // Update profile with backend data
+                        profile.fullName = data.fullName ?? ""
+                        profile.formattedDOB = formatDate(data.dateOfBirth)
+                        profile.addressLine1 = data.addressLine1 ?? ""
+                        profile.addressLine2 = data.addressLine2 ?? ""
+                        profile.suburb = data.suburb ?? ""
+                        profile.state = data.state ?? "VIC"
+                        profile.postcode = data.postcode ?? ""
+                        profile.licenceNumber = data.licenceNumber ?? ""
+                        profile.licenceType = data.licenceType ?? ""
+                        profile.proficiency = data.proficiency ?? ""
+                        profile.expiryDate = formatDate(data.expiryDate)
+                        profile.issueDate = formatDate(data.issueDate)
+                        profile.p2EndDate = formatDate(data.p2EndDate)
+                        profile.conditions = data.conditions ?? ""
+                        profile.cardNumber = data.cardNumber ?? ""
+                        
+                        // Mark as sealed if sealed on backend
+                        if data.sealedAt != nil {
+                            profile.status = .sealed
+                        }
+                        
+                        // Load photo from URL/base64 if available
+                        if let photoUrl = data.photoUrl, !photoUrl.isEmpty {
+                            loadPhoto(from: photoUrl)
+                        }
+                        
+                        // Load signature from URL/base64 if available
+                        if let sigUrl = data.signatureUrl, !sigUrl.isEmpty {
+                            loadSignature(from: sigUrl)
+                        }
+                        
+                        print("✅ Profile loaded: \(profile.fullName), Licence: \(profile.licenceNumber)")
                     } else {
-                        // Gap/space
-                    Rectangle()
-                            .fill(Color.clear)
-                            .frame(width: element.width * (geo.size.width / 320))  // Scale to fill width
+                        print("⚠️ No profile data from backend - using defaults")
                     }
+                }
+            } catch {
+                print("❌ Failed to load profile: \(error.localizedDescription)")
+                await MainActor.run {
+                    hasLoadedFromBackend = true
                 }
             }
         }
     }
     
-    // Barcode pattern matching mockup - wider bars, more spacing
-    private var barcodePattern: [(isBar: Bool, width: CGFloat)] {
-        [
-            // Group 1 - thicker bars
-            (true, 6), (false, 3), (true, 3), (false, 3), (true, 6), (false, 3), (true, 3), (false, 3),
-            (true, 9), (false, 3), (true, 3), (false, 6), (true, 3), (false, 3), (true, 6), (false, 3),
-            // Group 2 with bigger gap
-            (true, 3), (false, 3), (true, 12), (false, 6), (true, 3), (false, 3), (true, 6), (false, 3),
-            (true, 3), (false, 3), (true, 9), (false, 12), // large gap
-            // Group 3
-            (true, 6), (false, 3), (true, 3), (false, 3), (true, 12), (false, 3), (true, 3), (false, 6),
-            (true, 6), (false, 3), (true, 3), (false, 3), (true, 9), (false, 18), // large gap
-            // Group 4
-            (true, 12), (false, 3), (true, 3), (false, 3), (true, 6), (false, 6), (true, 3), (false, 3),
-            (true, 9), (false, 3), (true, 3), (false, 3), (true, 6), (false, 3), (true, 12), (false, 3),
-            // Group 5
-            (true, 3), (false, 3), (true, 6), (false, 6), (true, 9), (false, 3), (true, 3), (false, 3),
-            (true, 12), (false, 3), (true, 3), (false, 3), (true, 6)
-        ]
+    // MARK: - Format ISO Date to Display Format
+    private func formatDate(_ isoDate: String?) -> String {
+        guard let isoDate = isoDate, !isoDate.isEmpty else { return "" }
+        
+        // Try parsing ISO 8601 format
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        if let date = isoFormatter.date(from: isoDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        
+        // Try without fractional seconds
+        isoFormatter.formatOptions = [.withInternetDateTime]
+        if let date = isoFormatter.date(from: isoDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        
+        // Try simple date format
+        let simpleFormatter = DateFormatter()
+        simpleFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = simpleFormatter.date(from: isoDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        
+        // Return as-is if parsing fails
+        return isoDate
     }
-}
-
-// MARK: - Editor Sheets
-
-struct NameEditorSheet: View {
-    @Binding var name: String
-    @Environment(\.dismiss) private var dismiss
-    @State private var tempName: String = ""
     
-    var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Full Legal Name")) {
-                    TextField("Full Name", text: $tempName)
-                        .textInputAutocapitalization(.characters)
-                        .autocorrectionDisabled()
-                }
-                
-                Section(footer: Text("Enter your name exactly as it appears on your official ID.")) {
-                    EmptyView()
-                }
-            }
-            .navigationTitle("Edit Name")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        name = tempName.uppercased()
-                        dismiss()
-                    }
-                    .disabled(tempName.isEmpty)
+    // MARK: - Load Photo from URL or Base64
+    private func loadPhoto(from urlString: String) {
+        // Check if it's base64 data
+        if urlString.hasPrefix("data:image") {
+            // Extract base64 part
+            if let base64Start = urlString.range(of: "base64,") {
+                let base64String = String(urlString[base64Start.upperBound...])
+                if let data = Data(base64Encoded: base64String),
+                   let image = UIImage(data: data) {
+                    profile.photoImage = image
+                    print("✅ Photo loaded from base64")
+                    return
                 }
             }
         }
-        .onAppear { tempName = name }
-    }
-}
-
-struct DOBEditorSheet: View {
-    @Binding var formattedDOB: String
-    @Environment(\.dismiss) private var dismiss
-    @State private var selectedDate = Date()
-    
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy"
-        return formatter
-    }()
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Date of Birth")) {
-                    DatePicker("Date of Birth", selection: $selectedDate, displayedComponents: .date)
-                        .datePickerStyle(.wheel)
-                }
-            }
-            .navigationTitle("Edit Date of Birth")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        formattedDOB = dateFormatter.string(from: selectedDate)
-                        dismiss()
+        
+        // Otherwise try as URL
+        guard let url = URL(string: urlString) else { return }
+        
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                if let image = UIImage(data: data) {
+                    await MainActor.run {
+                        profile.photoImage = image
+                        print("✅ Photo loaded from URL")
                     }
                 }
+            } catch {
+                print("❌ Failed to load photo: \(error.localizedDescription)")
             }
         }
     }
-}
-
-struct AddressEditorSheet: View {
-    @Binding var addressLine1: String
-    @Binding var suburb: String
-    @Binding var state: String
-    @Binding var postcode: String
-    @Environment(\.dismiss) private var dismiss
     
-    @State private var tempAddress: String = ""
-    @State private var tempSuburb: String = ""
-    @State private var tempState: String = "VIC"
-    @State private var tempPostcode: String = ""
-    
-    let states = ["VIC", "NSW", "QLD", "SA", "WA", "TAS", "NT", "ACT"]
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Street Address")) {
-                    TextField("Street Address", text: $tempAddress)
-                        .textInputAutocapitalization(.characters)
-                }
-                
-                Section(header: Text("Suburb")) {
-                    TextField("Suburb", text: $tempSuburb)
-                        .textInputAutocapitalization(.characters)
-                }
-                
-                Section(header: Text("State")) {
-                    Picker("State", selection: $tempState) {
-                        ForEach(states, id: \.self) { Text($0) }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                
-                Section(header: Text("Postcode")) {
-                    TextField("Postcode", text: $tempPostcode)
-                        .keyboardType(.numberPad)
-                }
-            }
-            .navigationTitle("Edit Address")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        addressLine1 = tempAddress.uppercased()
-                        suburb = tempSuburb.uppercased()
-                        state = tempState
-                        postcode = tempPostcode
-                        dismiss()
-                    }
-                    .disabled(tempAddress.isEmpty || tempSuburb.isEmpty || tempPostcode.isEmpty)
+    // MARK: - Load Signature from URL or Base64
+    private func loadSignature(from urlString: String) {
+        // Check if it's base64 data
+        if urlString.hasPrefix("data:image") {
+            if let base64Start = urlString.range(of: "base64,") {
+                let base64String = String(urlString[base64Start.upperBound...])
+                if let data = Data(base64Encoded: base64String),
+                   let image = UIImage(data: data) {
+                    profile.signatureImage = image
+                    print("✅ Signature loaded from base64")
+                    return
                 }
             }
         }
-        .onAppear {
-            tempAddress = addressLine1
-            tempSuburb = suburb
-            tempState = state
-            tempPostcode = postcode
-        }
-    }
-}
-
-struct LicenceEditorSheet: View {
-    @Binding var licenceNumber: String
-    @Binding var licenceType: String
-    @Binding var proficiency: String
-    @Environment(\.dismiss) private var dismiss
-    
-    @State private var tempNumber: String = ""
-    @State private var tempType: String = "Car"
-    @State private var tempProficiency: String = "P2"
-    
-    let types = ["Car", "Motorcycle", "Heavy Vehicle", "Bus"]
-    let proficiencies = ["L", "P1", "P2", "Full"]
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Licence Number")) {
-                    TextField("Licence Number", text: $tempNumber)
-                        .keyboardType(.numberPad)
-                }
-                
-                Section(header: Text("Licence Type")) {
-                    Picker("Type", selection: $tempType) {
-                        ForEach(types, id: \.self) { Text($0) }
-                    }
-                    .pickerStyle(.segmented)
-                }
-                
-                Section(header: Text("Proficiency Level")) {
-                    Picker("Proficiency", selection: $tempProficiency) {
-                        ForEach(proficiencies, id: \.self) { Text($0) }
-                    }
-                    .pickerStyle(.segmented)
-                }
-            }
-            .navigationTitle("Edit Licence Details")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        licenceNumber = tempNumber
-                        licenceType = tempType
-                        proficiency = tempProficiency
-                        dismiss()
-                    }
-                    .disabled(tempNumber.isEmpty)
-                }
-            }
-        }
-        .onAppear {
-            tempNumber = licenceNumber
-            tempType = licenceType
-            tempProficiency = proficiency
-        }
-    }
-}
-
-struct ExpiryEditorSheet: View {
-    @Binding var expiryDate: String
-    @Binding var issueDate: String
-    @Binding var p2EndDate: String
-    @Environment(\.dismiss) private var dismiss
-    
-    @State private var tempExpiry = Date()
-    @State private var tempIssue = Date()
-    @State private var tempP2End = Date()
-    
-    private let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd MMM yyyy"
-        return formatter
-    }()
-    
-    var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("Issue Date")) {
-                    DatePicker("Issue Date", selection: $tempIssue, displayedComponents: .date)
-                }
-                
-                Section(header: Text("Expiry Date")) {
-                    DatePicker("Expiry Date", selection: $tempExpiry, displayedComponents: .date)
-                }
-                
-                Section(header: Text("P2 End Date")) {
-                    DatePicker("P2 End Date", selection: $tempP2End, displayedComponents: .date)
-                }
-            }
-            .navigationTitle("Edit Dates")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        expiryDate = dateFormatter.string(from: tempExpiry)
-                        issueDate = dateFormatter.string(from: tempIssue)
-                        p2EndDate = dateFormatter.string(from: tempP2End)
-                        dismiss()
+        
+        guard let url = URL(string: urlString) else { return }
+        
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                if let image = UIImage(data: data) {
+                    await MainActor.run {
+                        profile.signatureImage = image
                     }
                 }
-            }
-        }
-    }
-}
-
-struct SignaturePadSheet: View {
-    @Binding var signatureImage: UIImage?
-    @Environment(\.dismiss) private var dismiss
-    @State private var lines: [[CGPoint]] = []
-    @State private var currentLine: [CGPoint] = []
-    
-    var body: some View {
-        NavigationView {
-            VStack {
-                Text("Sign in the box below")
-                    .font(Font.vicRegular(size: 16))
-                    .foregroundColor(Color(hex: "8E8E93"))
-                    .padding(.top, 20)
-                
-                // Signature Canvas
-                Canvas { context, size in
-                    for line in lines {
-                        var path = Path()
-                        path.addLines(line)
-                        context.stroke(path, with: .color(.black), lineWidth: 2)
-                    }
-                    var currentPath = Path()
-                    currentPath.addLines(currentLine)
-                    context.stroke(currentPath, with: .color(.black), lineWidth: 2)
-                }
-                .frame(height: 200)
-                .background(Color.white)
-                .border(Color(hex: "E5E5EA"), width: 1)
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged { value in
-                            currentLine.append(value.location)
-                        }
-                        .onEnded { _ in
-                            lines.append(currentLine)
-                            currentLine = []
-                        }
-                )
-                .padding(.horizontal, 20)
-                .padding(.top, 20)
-                
-                Button("Clear") {
-                    lines = []
-                    currentLine = []
-                }
-                .font(Font.vicRegular(size: 16))
-                .foregroundColor(.red)
-                .padding(.top, 16)
-                
-                Spacer()
-            }
-            .navigationTitle("Add Signature")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        // Render signature to image
-                        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 300, height: 100))
-                        let image = renderer.image { ctx in
-                            ctx.cgContext.setFillColor(UIColor.white.cgColor)
-                            ctx.cgContext.fill(CGRect(x: 0, y: 0, width: 300, height: 100))
-                            ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
-                            ctx.cgContext.setLineWidth(2)
-                            
-                            for line in lines {
-                                guard line.count > 1 else { continue }
-                                ctx.cgContext.beginPath()
-                                ctx.cgContext.move(to: CGPoint(x: line[0].x * 0.5, y: line[0].y * 0.5))
-                                for point in line.dropFirst() {
-                                    ctx.cgContext.addLine(to: CGPoint(x: point.x * 0.5, y: point.y * 0.5))
-                                }
-                                ctx.cgContext.strokePath()
-                            }
-                        }
-                        signatureImage = image
-                        dismiss()
-                    }
-                    .disabled(lines.isEmpty)
-                }
+            } catch {
+                print("❌ Failed to load signature: \(error.localizedDescription)")
             }
         }
     }

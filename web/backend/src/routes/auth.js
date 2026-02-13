@@ -100,6 +100,7 @@ router.post('/signup', [
 /**
  * POST /api/auth/login
  * Login and get token
+ * ENFORCES DEVICE BINDING - account can only login from bound device
  */
 router.post('/login', [
   body('email').isEmail().normalizeEmail(),
@@ -112,6 +113,7 @@ router.post('/login', [
     }
 
     const { email, password } = req.body;
+    const deviceUUID = req.headers['x-device-uuid'];
 
     // Find user
     const result = await pool.query(
@@ -133,6 +135,27 @@ router.post('/login', [
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    // CHECK DEVICE BINDING - if account has a bound device, reject login from other devices
+    const deviceResult = await pool.query(
+      'SELECT device_uuid FROM devices WHERE user_id = $1 AND is_primary = true',
+      [user.id]
+    );
+
+    if (deviceResult.rows.length > 0) {
+      const boundDevice = deviceResult.rows[0].device_uuid;
+      if (deviceUUID && boundDevice !== deviceUUID) {
+        await logAudit(user.id, 'LOGIN_FAILED', { 
+          reason: 'Device mismatch',
+          boundDevice: boundDevice,
+          attemptedDevice: deviceUUID
+        }, req);
+        return res.status(403).json({ 
+          error: 'This account is bound to a different device. You cannot login from this device.',
+          code: 'DEVICE_BOUND'
+        });
+      }
+    }
+
     // Generate JWT
     const token = jwt.sign(
       { userId: user.id, email: user.email },
@@ -141,7 +164,7 @@ router.post('/login', [
     );
 
     // Audit log
-    await logAudit(user.id, 'LOGIN', { email }, req);
+    await logAudit(user.id, 'LOGIN', { email, deviceUUID }, req);
 
     res.json({
       user: {
