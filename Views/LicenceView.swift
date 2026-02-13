@@ -13,9 +13,8 @@ import PhotosUI
 struct LicenceScreen: View {
     var onBack: (() -> Void)? = nil
     
-    // Identity Profile - holds all editable data (loaded from backend)
-    @StateObject private var profile = IdentityProfile()
-    @State private var hasLoadedFromBackend = false
+    // Identity Profile - use shared preloaded profile
+    @ObservedObject private var profile = ProfileManager.shared.profile
     
     // Edit mode - when true, fields are tappable
     @State var isEditMode: Bool = false
@@ -467,7 +466,7 @@ struct LicenceScreen: View {
                                     Image(uiImage: signatureImg)
                                         .resizable()
                                         .aspectRatio(contentMode: .fit)
-                                        .frame(height: s(40))
+                                        .frame(height: s(70))
                                         .padding(.top, s(4))
                                 } else {
                                     // Signature placeholder (cursive style) - from LicenceDetailsFullView
@@ -697,11 +696,19 @@ struct LicenceScreen: View {
                                                 .font(Font.vicRegular(size: s(14)))
                                                 .foregroundColor(Color(hex: "8E8E93"))
                                             
-                                            Text("Signature")
-                                                .font(.system(size: s(24), weight: .thin, design: .rounded))
-                                                .foregroundColor(Color(hex: "253443"))
-                                                .italic()
-                                                .padding(.top, s(4))
+                                            if let signatureImg = profile.signatureImage {
+                                                Image(uiImage: signatureImg)
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .frame(height: s(70))
+                                                    .padding(.top, s(4))
+                                            } else {
+                                                Text("Signature")
+                                                    .font(.system(size: s(24), weight: .thin, design: .rounded))
+                                                    .foregroundColor(Color(hex: "253443"))
+                                                    .italic()
+                                                    .padding(.top, s(4))
+                                            }
                                         }
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.vertical, s(14))
@@ -776,168 +783,6 @@ struct LicenceScreen: View {
                    let image = UIImage(data: data) {
                     profile.photoImage = image
                 }
-            }
-        }
-        .onAppear {
-            loadProfileFromBackend()
-        }
-    }
-    
-    // MARK: - Load Profile from Backend
-    private func loadProfileFromBackend() {
-        guard !hasLoadedFromBackend else { return }
-        
-        Task {
-            do {
-                print("🔄 Loading profile from backend...")
-                let response = try await APIService.shared.getIdentityProfile()
-                
-                await MainActor.run {
-                    hasLoadedFromBackend = true
-                    
-                    if let data = response.profile {
-                        // Update profile with backend data
-                        profile.fullName = data.fullName ?? ""
-                        profile.formattedDOB = formatDate(data.dateOfBirth)
-                        profile.addressLine1 = data.addressLine1 ?? ""
-                        profile.addressLine2 = data.addressLine2 ?? ""
-                        profile.suburb = data.suburb ?? ""
-                        profile.state = data.state ?? "VIC"
-                        profile.postcode = data.postcode ?? ""
-                        profile.licenceNumber = data.licenceNumber ?? ""
-                        profile.licenceType = data.licenceType ?? ""
-                        profile.proficiency = data.proficiency ?? ""
-                        profile.expiryDate = formatDate(data.expiryDate)
-                        profile.issueDate = formatDate(data.issueDate)
-                        profile.p2EndDate = formatDate(data.p2EndDate)
-                        profile.conditions = data.conditions ?? ""
-                        profile.cardNumber = data.cardNumber ?? ""
-                        
-                        // Mark as sealed if sealed on backend
-                        if data.sealedAt != nil {
-                            profile.status = .sealed
-                        }
-                        
-                        // Load photo from URL/base64 if available
-                        if let photoUrl = data.photoUrl, !photoUrl.isEmpty {
-                            loadPhoto(from: photoUrl)
-                        }
-                        
-                        // Load signature from URL/base64 if available
-                        if let sigUrl = data.signatureUrl, !sigUrl.isEmpty {
-                            loadSignature(from: sigUrl)
-                        }
-                        
-                        print("✅ Profile loaded: \(profile.fullName), Licence: \(profile.licenceNumber)")
-                    } else {
-                        print("⚠️ No profile data from backend - using defaults")
-                    }
-                }
-            } catch {
-                print("❌ Failed to load profile: \(error.localizedDescription)")
-                await MainActor.run {
-                    hasLoadedFromBackend = true
-                }
-            }
-        }
-    }
-    
-    // MARK: - Format ISO Date to Display Format
-    private func formatDate(_ isoDate: String?) -> String {
-        guard let isoDate = isoDate, !isoDate.isEmpty else { return "" }
-        
-        // Try parsing ISO 8601 format
-        let isoFormatter = ISO8601DateFormatter()
-        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        
-        if let date = isoFormatter.date(from: isoDate) {
-            let displayFormatter = DateFormatter()
-            displayFormatter.dateFormat = "dd MMM yyyy"
-            return displayFormatter.string(from: date)
-        }
-        
-        // Try without fractional seconds
-        isoFormatter.formatOptions = [.withInternetDateTime]
-        if let date = isoFormatter.date(from: isoDate) {
-            let displayFormatter = DateFormatter()
-            displayFormatter.dateFormat = "dd MMM yyyy"
-            return displayFormatter.string(from: date)
-        }
-        
-        // Try simple date format
-        let simpleFormatter = DateFormatter()
-        simpleFormatter.dateFormat = "yyyy-MM-dd"
-        if let date = simpleFormatter.date(from: isoDate) {
-            let displayFormatter = DateFormatter()
-            displayFormatter.dateFormat = "dd MMM yyyy"
-            return displayFormatter.string(from: date)
-        }
-        
-        // Return as-is if parsing fails
-        return isoDate
-    }
-    
-    // MARK: - Load Photo from URL or Base64
-    private func loadPhoto(from urlString: String) {
-        // Check if it's base64 data
-        if urlString.hasPrefix("data:image") {
-            // Extract base64 part
-            if let base64Start = urlString.range(of: "base64,") {
-                let base64String = String(urlString[base64Start.upperBound...])
-                if let data = Data(base64Encoded: base64String),
-                   let image = UIImage(data: data) {
-                    profile.photoImage = image
-                    print("✅ Photo loaded from base64")
-                    return
-                }
-            }
-        }
-        
-        // Otherwise try as URL
-        guard let url = URL(string: urlString) else { return }
-        
-        Task {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                if let image = UIImage(data: data) {
-                    await MainActor.run {
-                        profile.photoImage = image
-                        print("✅ Photo loaded from URL")
-                    }
-                }
-            } catch {
-                print("❌ Failed to load photo: \(error.localizedDescription)")
-            }
-        }
-    }
-    
-    // MARK: - Load Signature from URL or Base64
-    private func loadSignature(from urlString: String) {
-        // Check if it's base64 data
-        if urlString.hasPrefix("data:image") {
-            if let base64Start = urlString.range(of: "base64,") {
-                let base64String = String(urlString[base64Start.upperBound...])
-                if let data = Data(base64Encoded: base64String),
-                   let image = UIImage(data: data) {
-                    profile.signatureImage = image
-                    print("✅ Signature loaded from base64")
-                    return
-                }
-            }
-        }
-        
-        guard let url = URL(string: urlString) else { return }
-        
-        Task {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                if let image = UIImage(data: data) {
-                    await MainActor.run {
-                        profile.signatureImage = image
-                    }
-                }
-            } catch {
-                print("❌ Failed to load signature: \(error.localizedDescription)")
             }
         }
     }

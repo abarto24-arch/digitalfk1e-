@@ -205,4 +205,83 @@ router.get('/verify-session/:sessionId', auth, async (req, res) => {
   }
 });
 
+/**
+ * POST /api/payment/redeem-code
+ * Redeem a payment code (for cash payments)
+ */
+router.post('/redeem-code', auth, async (req, res) => {
+  try {
+    const { code } = req.body;
+    const userId = req.user.userId;
+
+    if (!code) {
+      return res.status(400).json({ error: 'Payment code is required' });
+    }
+
+    // Normalize code (remove dashes, uppercase)
+    const normalizedCode = code.replace(/-/g, '').toUpperCase();
+    const formattedCode = `${normalizedCode.slice(0,4)}-${normalizedCode.slice(4,8)}-${normalizedCode.slice(8,12)}`;
+
+    // Check if user is already paid
+    const userResult = await pool.query(
+      'SELECT paid_status FROM users WHERE id = $1',
+      [userId]
+    );
+
+    if (userResult.rows.length === 0) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (userResult.rows[0].paid_status === 'PAID') {
+      return res.status(400).json({ error: 'You have already paid' });
+    }
+
+    // Find and validate the code
+    const codeResult = await pool.query(
+      `SELECT * FROM payment_codes 
+       WHERE code = $1 AND status = 'ACTIVE' AND expires_at > CURRENT_TIMESTAMP`,
+      [formattedCode]
+    );
+
+    if (codeResult.rows.length === 0) {
+      // Check if code exists but is invalid
+      const anyCode = await pool.query('SELECT status, expires_at FROM payment_codes WHERE code = $1', [formattedCode]);
+      if (anyCode.rows.length > 0) {
+        const pc = anyCode.rows[0];
+        if (pc.status === 'USED') {
+          return res.status(400).json({ error: 'This code has already been used' });
+        } else if (pc.status === 'REVOKED') {
+          return res.status(400).json({ error: 'This code has been revoked' });
+        } else if (new Date(pc.expires_at) < new Date()) {
+          return res.status(400).json({ error: 'This code has expired' });
+        }
+      }
+      return res.status(400).json({ error: 'Invalid payment code' });
+    }
+
+    // Redeem the code - mark it as used
+    await pool.query(
+      `UPDATE payment_codes SET status = 'USED', redeemed_by = $1, redeemed_at = CURRENT_TIMESTAMP WHERE code = $2`,
+      [userId, formattedCode]
+    );
+
+    // Mark user as paid
+    await pool.query(
+      `UPDATE users SET paid_status = 'PAID', paid_at = CURRENT_TIMESTAMP WHERE id = $1`,
+      [userId]
+    );
+
+    await logAudit(userId, 'PAYMENT_CODE_REDEEMED', { code: formattedCode }, req);
+
+    res.json({
+      success: true,
+      message: 'Payment code redeemed successfully. Your account is now paid!'
+    });
+
+  } catch (error) {
+    console.error('Redeem code error:', error);
+    res.status(500).json({ error: 'Failed to redeem payment code' });
+  }
+});
+
 module.exports = router;

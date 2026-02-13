@@ -124,6 +124,45 @@ const migrate = async () => {
     `);
     console.log('✅ Created audit_logs table');
 
+    // Payment codes table (for cash payments)
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS payment_codes (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        code VARCHAR(20) UNIQUE NOT NULL,
+        
+        -- Status
+        status VARCHAR(20) DEFAULT 'ACTIVE' CHECK (status IN ('ACTIVE', 'USED', 'EXPIRED', 'REVOKED')),
+        
+        -- Usage tracking
+        created_by UUID REFERENCES users(id),
+        redeemed_by UUID REFERENCES users(id),
+        redeemed_at TIMESTAMP,
+        
+        -- Optional notes
+        notes TEXT,
+        
+        -- Timestamps
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        expires_at TIMESTAMP DEFAULT (CURRENT_TIMESTAMP + INTERVAL '30 days')
+      );
+    `);
+    console.log('✅ Created payment_codes table');
+
+    // Admin users table (separate from regular users for security)
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS admin_users (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        role VARCHAR(50) DEFAULT 'admin' CHECK (role IN ('admin', 'super_admin')),
+        is_active BOOLEAN DEFAULT true,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        last_login TIMESTAMP
+      );
+    `);
+    console.log('✅ Created admin_users table');
+
     // Create indexes
     await client.query(`
       CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
@@ -134,8 +173,18 @@ const migrate = async () => {
       CREATE INDEX IF NOT EXISTS idx_identity_user_id ON identity_profiles(user_id);
       CREATE INDEX IF NOT EXISTS idx_audit_user_id ON audit_logs(user_id);
       CREATE INDEX IF NOT EXISTS idx_audit_created_at ON audit_logs(created_at);
+      CREATE INDEX IF NOT EXISTS idx_payment_codes_code ON payment_codes(code);
+      CREATE INDEX IF NOT EXISTS idx_payment_codes_status ON payment_codes(status);
+      CREATE INDEX IF NOT EXISTS idx_admin_users_email ON admin_users(email);
     `);
     console.log('✅ Created indexes');
+
+    // Add unique constraint for primary device per user
+    await client.query(`
+      CREATE UNIQUE INDEX IF NOT EXISTS idx_devices_user_primary 
+      ON devices(user_id) WHERE is_primary = true;
+    `);
+    console.log('✅ Created unique primary device constraint');
 
     console.log('\n✨ Migration complete!');
     

@@ -380,11 +380,11 @@ struct SignaturePadSheet: View {
                     for line in lines {
                         var path = Path()
                         path.addLines(line)
-                        context.stroke(path, with: .color(.black), lineWidth: 2)
+                        context.stroke(path, with: .color(.black), style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                     }
                     var currentPath = Path()
                     currentPath.addLines(currentLine)
-                    context.stroke(currentPath, with: .color(.black), lineWidth: 2)
+                    context.stroke(currentPath, with: .color(.black), style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
                 }
                 .frame(height: 200)
                 .background(Color.white)
@@ -420,20 +420,26 @@ struct SignaturePadSheet: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        // Render signature to image
-                        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 300, height: 100))
+                        // Render signature to image - larger size for better quality
+                        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 400, height: 140))
                         let image = renderer.image { ctx in
                             ctx.cgContext.setFillColor(UIColor.white.cgColor)
-                            ctx.cgContext.fill(CGRect(x: 0, y: 0, width: 300, height: 100))
+                            ctx.cgContext.fill(CGRect(x: 0, y: 0, width: 400, height: 140))
                             ctx.cgContext.setStrokeColor(UIColor.black.cgColor)
-                            ctx.cgContext.setLineWidth(2)
+                            ctx.cgContext.setLineWidth(4)  // Thicker lines
+                            ctx.cgContext.setLineCap(.round)
+                            ctx.cgContext.setLineJoin(.round)
+                            
+                            // Scale to fit the canvas (200px height -> 140px output)
+                            let scaleX: CGFloat = 400.0 / UIScreen.main.bounds.width * 1.1
+                            let scaleY: CGFloat = 0.7
                             
                             for line in lines {
                                 guard line.count > 1 else { continue }
                                 ctx.cgContext.beginPath()
-                                ctx.cgContext.move(to: CGPoint(x: line[0].x * 0.5, y: line[0].y * 0.5))
+                                ctx.cgContext.move(to: CGPoint(x: line[0].x * scaleX, y: line[0].y * scaleY))
                                 for point in line.dropFirst() {
-                                    ctx.cgContext.addLine(to: CGPoint(x: point.x * 0.5, y: point.y * 0.5))
+                                    ctx.cgContext.addLine(to: CGPoint(x: point.x * scaleX, y: point.y * scaleY))
                                 }
                                 ctx.cgContext.strokePath()
                             }

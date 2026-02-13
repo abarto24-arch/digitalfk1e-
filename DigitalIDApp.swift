@@ -38,12 +38,111 @@ struct DigitalIDApp: App {
     }
 }
 
+// MARK: - Shared Profile Manager (preloads data during loading screen)
+class ProfileManager: ObservableObject {
+    static let shared = ProfileManager()
+    @Published var profile = IdentityProfile()
+    @Published var isLoaded = false
+    
+    func preloadProfile() async {
+        do {
+            let response = try await APIService.shared.getIdentityProfile()
+            await MainActor.run {
+                if let data = response.profile {
+                    profile.fullName = data.fullName ?? ""
+                    profile.formattedDOB = formatDate(data.dateOfBirth)
+                    profile.addressLine1 = data.addressLine1 ?? ""
+                    profile.addressLine2 = data.addressLine2 ?? ""
+                    profile.suburb = data.suburb ?? ""
+                    profile.state = data.state ?? "VIC"
+                    profile.postcode = data.postcode ?? ""
+                    profile.licenceNumber = data.licenceNumber ?? ""
+                    profile.licenceType = data.licenceType ?? ""
+                    profile.proficiency = data.proficiency ?? ""
+                    profile.expiryDate = formatDate(data.expiryDate)
+                    profile.issueDate = formatDate(data.issueDate)
+                    profile.p2EndDate = formatDate(data.p2EndDate)
+                    profile.conditions = data.conditions ?? ""
+                    profile.cardNumber = data.cardNumber ?? ""
+                    
+                    if data.sealedAt != nil {
+                        profile.status = .sealed
+                    }
+                    
+                    // Load photo
+                    if let photoUrl = data.photoUrl, !photoUrl.isEmpty {
+                        loadImage(from: photoUrl) { image in
+                            self.profile.photoImage = image
+                        }
+                    }
+                    
+                    // Load signature
+                    if let sigUrl = data.signatureUrl, !sigUrl.isEmpty {
+                        loadImage(from: sigUrl) { image in
+                            self.profile.signatureImage = image
+                        }
+                    }
+                }
+                isLoaded = true
+            }
+        } catch {
+            print("Failed to preload profile: \(error)")
+            await MainActor.run { isLoaded = true }
+        }
+    }
+    
+    private func formatDate(_ isoDate: String?) -> String {
+        guard let isoDate = isoDate, !isoDate.isEmpty else { return "" }
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        if let date = isoFormatter.date(from: isoDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        isoFormatter.formatOptions = [.withInternetDateTime]
+        if let date = isoFormatter.date(from: isoDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        let simpleFormatter = DateFormatter()
+        simpleFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = simpleFormatter.date(from: isoDate) {
+            let displayFormatter = DateFormatter()
+            displayFormatter.dateFormat = "dd MMM yyyy"
+            return displayFormatter.string(from: date)
+        }
+        return isoDate
+    }
+    
+    private func loadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+        if urlString.hasPrefix("data:image") {
+            if let base64Start = urlString.range(of: "base64,") {
+                let base64String = String(urlString[base64Start.upperBound...])
+                if let data = Data(base64Encoded: base64String),
+                   let image = UIImage(data: data) {
+                    DispatchQueue.main.async { completion(image) }
+                    return
+                }
+            }
+        }
+        guard let url = URL(string: urlString) else { completion(nil); return }
+        URLSession.shared.dataTask(with: url) { data, _, _ in
+            if let data = data, let image = UIImage(data: data) {
+                DispatchQueue.main.async { completion(image) }
+            }
+        }.resume()
+    }
+}
+
 // MARK: - Main Content View with Custom Tab Bar
 
 struct MainContentView: View {
     @State private var selectedTab: Int = 0
     @State private var showLoading = false
     @State private var showLicenceDetail = false
+    @StateObject private var profileManager = ProfileManager.shared
     
     // Auth state
     @State private var isLoggedIn = false
@@ -95,9 +194,14 @@ struct MainContentView: View {
                         case 0:
                             HomeScreen(onLicenceTap: {
                                 showLoading = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                                    showLoading = false
-                                    showLicenceDetail = true
+                                // Preload profile during loading screen
+                                Task {
+                                    await profileManager.preloadProfile()
+                                    try? await Task.sleep(nanoseconds: 2_000_000_000) // Min 2 sec loading
+                                    await MainActor.run {
+                                        showLoading = false
+                                        showLicenceDetail = true
+                                    }
                                 }
                             })
                         case 1:
@@ -105,9 +209,13 @@ struct MainContentView: View {
                         case 2:
                             LicenceListScreen(onLicenceTap: {
                                 showLoading = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                                    showLoading = false
-                                    showLicenceDetail = true
+                                Task {
+                                    await profileManager.preloadProfile()
+                                    try? await Task.sleep(nanoseconds: 2_000_000_000)
+                                    await MainActor.run {
+                                        showLoading = false
+                                        showLicenceDetail = true
+                                    }
                                 }
                             })
                         case 3:
@@ -117,9 +225,13 @@ struct MainContentView: View {
                         default:
                             HomeScreen(onLicenceTap: {
                                 showLoading = true
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                                    showLoading = false
-                                    showLicenceDetail = true
+                                Task {
+                                    await profileManager.preloadProfile()
+                                    try? await Task.sleep(nanoseconds: 2_000_000_000)
+                                    await MainActor.run {
+                                        showLoading = false
+                                        showLicenceDetail = true
+                                    }
                                 }
                             })
                         }
