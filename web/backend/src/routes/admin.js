@@ -14,6 +14,11 @@ const { logAudit } = require('../utils/audit');
 
 const router = express.Router();
 
+// Simple ping endpoint (no auth required) for debugging
+router.get('/ping', (req, res) => {
+  res.json({ pong: true, time: new Date().toISOString() });
+});
+
 // ================================
 // ADMIN AUTHENTICATION
 // ================================
