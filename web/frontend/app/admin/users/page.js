@@ -255,7 +255,10 @@ export default function AdminUsersPage() {
                     {selectedUser.user?.approvedStatus === 'PENDING' && (
                       <div className="flex space-x-2">
                         <button
-                          onClick={() => handleAction('approve', selectedUser.user.id)}
+                          onClick={() => {
+                            console.log('Approving user:', selectedUser.user);
+                            handleAction('approve', selectedUser.user.id);
+                          }}
                           disabled={actionLoading}
                           className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-600 text-white text-sm font-medium rounded-lg transition-colors"
                         >

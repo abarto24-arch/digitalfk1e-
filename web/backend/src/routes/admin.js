@@ -180,14 +180,20 @@ router.get('/users', auth, adminAuth, async (req, res) => {
 router.post('/users/:userId/approve', auth, adminAuth, async (req, res) => {
   try {
     const { userId } = req.params;
+    
+    console.log('Approve request for userId:', userId);
+    console.log('Admin user:', req.user);
 
     // Check user exists and is paid
     const userResult = await pool.query(
       'SELECT id, email, paid_status, approved_status FROM users WHERE id = $1',
       [userId]
     );
+    
+    console.log('Query result rows:', userResult.rows.length);
 
     if (userResult.rows.length === 0) {
+      console.log('User not found in database for id:', userId);
       return res.status(404).json({ error: 'User not found' });
     }
 
