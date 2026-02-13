@@ -41,7 +41,17 @@ app.use(express.json({ limit: '10mb' }));
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString(), version: '1.2.0' });
+  res.json({ status: 'ok', timestamp: new Date().toISOString(), version: '1.3.0' });
+});
+
+// Debug: Log that routes are loading
+console.log('Loading routes...');
+console.log('Auth routes loaded:', !!authRoutes);
+console.log('Admin routes loaded:', !!adminRoutes);
+
+// Debug endpoint right before routes
+app.get('/api/test-route', (req, res) => {
+  res.json({ working: true, version: '1.3.0' });
 });
 
 // API Routes
@@ -50,6 +60,8 @@ app.use('/api/payment', paymentRoutes);
 app.use('/api/identity', identityRoutes);
 app.use('/api/device', deviceRoutes);
 app.use('/api/admin', adminRoutes);
+
+console.log('All routes mounted!');
 
 // Error handler
 app.use((err, req, res, next) => {
