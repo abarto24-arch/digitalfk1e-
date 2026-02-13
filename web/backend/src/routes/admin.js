@@ -174,6 +174,14 @@ router.get('/users', auth, adminAuth, async (req, res) => {
 });
 
 /**
+ * POST /api/admin/test-action
+ * Test endpoint for debugging
+ */
+router.post('/test-action', auth, adminAuth, async (req, res) => {
+  res.json({ success: true, message: 'Test action works!', user: req.user });
+});
+
+/**
  * POST /api/admin/users/:userId/approve
  * Approve a user
  */
