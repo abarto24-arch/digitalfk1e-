@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-const TESTFLIGHT_URL = process.env.NEXT_PUBLIC_TESTFLIGHT_URL || 'https://testflight.apple.com/join/YOUR_CODE';
+const TESTFLIGHT_URL = 'https://testflight.apple.com/join/ATv18uvT';
 
 export default function TestFlight() {
   const router = useRouter();
